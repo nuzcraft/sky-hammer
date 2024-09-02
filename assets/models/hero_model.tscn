@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://diwoax8yqrwn2"]
+
+[ext_resource type="PackedScene" uid="uid://c5esjcj7i4orp" path="res://assets/models/hero.blend" id="1_ei1my"]
+
+[node name="HeroModel" instance=ExtResource("1_ei1my")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-1.64623e-21, 0.95606, 2.73912e-09)
+bones/0/rotation = Quaternion(-0.0165984, -0.295122, -0.00827381, 0.95528)
+bones/1/rotation = Quaternion(0.112617, 0.18621, -0.0121275, 0.975959)
+bones/2/rotation = Quaternion(-0.0112677, -0.0651347, 0.989385, -0.129415)
+bones/4/rotation = Quaternion(0.294455, 0.121734, 0.939733, -0.124007)
+bones/4/scale = Vector3(1.00006, 1, 1.00003)
+bones/5/rotation = Quaternion(-0.209693, 0.000473327, -0.059357, 0.975964)
+bones/6/rotation = Quaternion(0.5827, 0.0135814, 0.00243161, 0.81257)
+bones/6/scale = Vector3(1.00002, 1.00001, 1.00001)
+bones/7/rotation = Quaternion(-0.0242239, -0.0878492, 0.990179, 0.106028)
+bones/8/rotation = Quaternion(0.220835, 0.0368728, 0.0582146, 0.972874)
+bones/9/rotation = Quaternion(0.128643, -0.0563757, 0.985849, 0.0915158)
+bones/9/scale = Vector3(1.00006, 0.999999, 1.00003)
+bones/10/rotation = Quaternion(-0.0551735, -0.000484198, 0.0156177, 0.998355)
+bones/11/rotation = Quaternion(0.638323, -0.0371663, 0.0223794, 0.768545)
+bones/11/scale = Vector3(0.999998, 1.00003, 1)
+bones/12/rotation = Quaternion(-0.0300588, 0.706468, 0.706468, -0.0300588)
+bones/13/position = Vector3(0.154038, 0.0877113, 0.149709)
+bones/14/position = Vector3(-0.301885, 0.507067, 0.399896)
+bones/15/position = Vector3(-0.154038, 0.0808962, -0.242002)
+bones/15/rotation = Quaternion(0.119328, 0.703366, -0.696965, 0.0726425)
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "idle"

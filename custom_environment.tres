@@ -1,0 +1,23 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://de42pcq6ihk6f"]
+
+[ext_resource type="Shader" path="res://shaders/sky-sokpop.gdshader" id="1_co1bn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bap6m"]
+shader = ExtResource("1_co1bn")
+shader_parameter/color_top = Color(0.960784, 0.933333, 0.894118, 1)
+shader_parameter/color_horizon = Color(0.278431, 0.560784, 0.792157, 1)
+shader_parameter/color_bottom = Color(0.145098, 0.184314, 0.25098, 1)
+shader_parameter/exponent_factor_top = 1.5
+shader_parameter/exponent_factor_bottom = 1.5
+shader_parameter/intensity_amp = 1.0
+
+[sub_resource type="Sky" id="Sky_1ye21"]
+sky_material = SubResource("ShaderMaterial_bap6m")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_1ye21")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+reflected_light_source = 2
