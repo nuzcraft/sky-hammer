@@ -1,23 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmeu6itpc0f30"]
+[gd_scene load_steps=5 format=3 uid="uid://dmeu6itpc0f30"]
 
 [ext_resource type="PackedScene" uid="uid://diwoax8yqrwn2" path="res://assets/models/hero_model.tscn" id="1_7xmbd"]
+[ext_resource type="Script" path="res://scenes/hero/hero.gd" id="1_c27ct"]
+[ext_resource type="Script" path="res://scenes/hero/camera_joint.gd" id="2_48fn1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vgxs5"]
 radius = 0.4
 
 [node name="Hero" type="CharacterBody3D"]
+script = ExtResource("1_c27ct")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_vgxs5")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
+[node name="CameraJoint" type="SpringArm3D" parent="."]
 top_level = true
 collision_mask = 2
-spring_length = 2.5
+spring_length = 3.5
 margin = 0.2
+script = ExtResource("2_48fn1")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+[node name="Camera3D" type="Camera3D" parent="CameraJoint"]
 v_offset = 1.0
 
 [node name="HeroModel" parent="." instance=ExtResource("1_7xmbd")]
