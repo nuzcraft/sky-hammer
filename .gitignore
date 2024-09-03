@@ -14,3 +14,6 @@ export.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# big reference file
+reference/mhfu_anim_reference.mp4
