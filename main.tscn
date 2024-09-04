@@ -9,10 +9,7 @@ albedo_color = Color(0.537255, 0.666667, 0.333333, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ecjik"]
 material = SubResource("StandardMaterial3D_eagy4")
-size = Vector2(20, 20)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bnwmm"]
-data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+size = Vector2(40, 40)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbg6c"]
 diffuse_mode = 1
@@ -20,6 +17,9 @@ albedo_color = Color(0.619608, 0.196078, 0.152941, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_4nb16"]
 material = SubResource("StandardMaterial3D_wbg6c")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ahgx6"]
+data = PackedVector3Array(20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, 20, -20, 0, -20, 20, 0, -20)
 
 [node name="Main" type="Node3D"]
 
@@ -33,14 +33,14 @@ shadow_enabled = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ecjik")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_bnwmm")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-0.219676, 0, 0.975573, 0, 1, 0, -0.975573, 0, -0.219676, 2.06317, 1.31466, 0)
 mesh = SubResource("BoxMesh_4nb16")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_ahgx6")
 
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
 transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -4, 5.96046e-08, 0)
