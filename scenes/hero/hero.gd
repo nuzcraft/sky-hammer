@@ -11,20 +11,19 @@ const FRICTION: float = 0.8
 @onready var camera_joint: SpringArm3D = $CameraJoint
 @onready var model: Node3D = $HeroModel
 @onready var animation_tree: AnimationTree = model.get_node("AnimationTree")
+@onready var animation_player: AnimationPlayer = model.get_node("AnimationPlayer")
+
+var sheathed: bool = true
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("attack") and sheathed:
+		animation_tree.set("parameters/unsheath_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		animation_tree.set("parameters/sheath_state/transition_request", "unsheathed")
+		sheathed = false
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var input_dir := Input.get_vector("left", "right", "up", "down")
-	#var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	move_direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -42,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
 		velocity.z = move_toward(velocity.z, 0, FRICTION)
 
-	animation_tree.set("parameters/BS1D_Idle_Run/blend_position", Vector2(velocity.x, velocity.z).length() / RUN_SPEED)
+	animation_tree.set("parameters/idle_run_blend/blend_amount", Vector2(velocity.x, velocity.z).length() / RUN_SPEED)
 	move_and_slide()
 	
 	if velocity.length() > 0.2:
