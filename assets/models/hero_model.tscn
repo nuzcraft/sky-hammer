@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://diwoax8yqrwn2"]
+[gd_scene load_steps=16 format=3 uid="uid://diwoax8yqrwn2"]
 
 [ext_resource type="PackedScene" uid="uid://c5esjcj7i4orp" path="res://assets/models/hero.blend" id="1_ei1my"]
 
@@ -16,7 +16,12 @@ animation = &"idle_unsheath"
 animation = &"run"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_81h2d"]
-animation = &"run"
+animation = &"run_unsheath"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_op5h8"]
+animation = &"sheath"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_pxt86"]
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_1fh6v"]
 input_0/name = "sheathed"
@@ -31,10 +36,15 @@ input_1/reset = true
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_22sn6"]
 animation = &"unsheath"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5r5hq"]
+animation = &"unsheath_attack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_g13fy"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b4op3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_43awg"]
-graph_offset = Vector2(-651.665, 39.0724)
+graph_offset = Vector2(-409.847, 39.55)
 nodes/idle_animation/node = SubResource("AnimationNodeAnimation_sxjjh")
 nodes/idle_animation/position = Vector2(-520, 120)
 nodes/idle_run_blend/node = SubResource("AnimationNodeBlend2_cg10p")
@@ -43,17 +53,26 @@ nodes/idle_run_blend2/node = SubResource("AnimationNodeBlend2_1d0tg")
 nodes/idle_run_blend2/position = Vector2(-320, 420)
 nodes/idle_unsheath_animation/node = SubResource("AnimationNodeAnimation_bcp16")
 nodes/idle_unsheath_animation/position = Vector2(-560, 420)
+nodes/output/position = Vector2(800, 420)
 nodes/run_animation/node = SubResource("AnimationNodeAnimation_icrci")
 nodes/run_animation/position = Vector2(-520, 260)
-nodes/run_animation2/node = SubResource("AnimationNodeAnimation_81h2d")
-nodes/run_animation2/position = Vector2(-540, 580)
+nodes/run_unsheath_animation/node = SubResource("AnimationNodeAnimation_81h2d")
+nodes/run_unsheath_animation/position = Vector2(-540, 580)
+nodes/sheath_animation/node = SubResource("AnimationNodeAnimation_op5h8")
+nodes/sheath_animation/position = Vector2(140, 540)
+nodes/sheath_shot/node = SubResource("AnimationNodeOneShot_pxt86")
+nodes/sheath_shot/position = Vector2(360, 340)
 nodes/sheath_state/node = SubResource("AnimationNodeTransition_1fh6v")
 nodes/sheath_state/position = Vector2(-120, 180)
 nodes/unsheath_animation/node = SubResource("AnimationNodeAnimation_22sn6")
 nodes/unsheath_animation/position = Vector2(-60, 400)
+nodes/unsheath_attack_animation/node = SubResource("AnimationNodeAnimation_5r5hq")
+nodes/unsheath_attack_animation/position = Vector2(300, 620)
+nodes/unsheath_attack_shot/node = SubResource("AnimationNodeOneShot_g13fy")
+nodes/unsheath_attack_shot/position = Vector2(540, 420)
 nodes/unsheath_shot/node = SubResource("AnimationNodeOneShot_b4op3")
 nodes/unsheath_shot/position = Vector2(160, 240)
-node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 1, &"run_animation", &"idle_run_blend2", 0, &"idle_unsheath_animation", &"idle_run_blend2", 1, &"run_animation2", &"output", 0, &"unsheath_shot", &"sheath_state", 0, &"idle_run_blend", &"sheath_state", 1, &"idle_run_blend2", &"unsheath_shot", 0, &"sheath_state", &"unsheath_shot", 1, &"unsheath_animation"]
+node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 1, &"run_animation", &"idle_run_blend2", 0, &"idle_unsheath_animation", &"idle_run_blend2", 1, &"run_unsheath_animation", &"output", 0, &"unsheath_attack_shot", &"sheath_shot", 0, &"unsheath_shot", &"sheath_shot", 1, &"sheath_animation", &"sheath_state", 0, &"idle_run_blend", &"sheath_state", 1, &"idle_run_blend2", &"unsheath_attack_shot", 0, &"sheath_shot", &"unsheath_attack_shot", 1, &"unsheath_attack_animation", &"unsheath_shot", 0, &"sheath_state", &"unsheath_shot", 1, &"unsheath_animation"]
 
 [node name="HeroModel" instance=ExtResource("1_ei1my")]
 
@@ -61,25 +80,26 @@ node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(-4.25175e-22, 0.957854, 1.93288e-09)
-bones/0/rotation = Quaternion(-0.0198851, -0.294086, -0.00671508, 0.955548)
-bones/1/rotation = Quaternion(0.116726, 0.186081, -0.0139336, 0.975477)
-bones/2/rotation = Quaternion(-0.0108143, -0.0620042, 0.989302, -0.131604)
+bones/0/position = Vector3(-1.8011e-22, 0.958214, 2.29505e-09)
+bones/0/rotation = Quaternion(-0.0203279, -0.293947, -0.00650507, 0.955584)
+bones/1/rotation = Quaternion(0.117215, 0.186065, -0.0141489, 0.975418)
+bones/2/rotation = Quaternion(-0.0107529, -0.0615806, 0.98929, -0.1319)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(0.141531, -0.00219147, -0.010074, 0.98988)
-bones/4/rotation = Quaternion(0.29376, 0.113436, 0.941657, -0.118828)
+bones/4/rotation = Quaternion(0.293674, 0.112326, 0.941904, -0.118135)
 bones/4/scale = Vector3(1.00006, 1, 1.00003)
-bones/5/rotation = Quaternion(-0.197638, 0.000474666, -0.0559446, 0.978677)
+bones/5/rotation = Quaternion(-0.195983, 0.000474821, -0.055476, 0.979037)
 bones/5/scale = Vector3(1, 0.999997, 0.999995)
-bones/6/rotation = Quaternion(0.57749, 0.0123968, 0.00106213, 0.816303)
+bones/6/rotation = Quaternion(0.576924, 0.0122693, 0.000913112, 0.816705)
 bones/6/scale = Vector3(1.00002, 1.00001, 1.00001)
-bones/7/rotation = Quaternion(-0.0243661, -0.0860591, 0.990471, 0.104729)
+bones/7/rotation = Quaternion(-0.0243918, -0.0857354, 0.990523, 0.104495)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(0.220835, 0.0368728, 0.0582146, 0.972874)
-bones/9/rotation = Quaternion(0.125109, -0.0847079, 0.984446, 0.0896621)
+bones/9/rotation = Quaternion(0.125009, -0.0850824, 0.984406, 0.089885)
 bones/9/scale = Vector3(1.00006, 0.999999, 1.00003)
-bones/10/rotation = Quaternion(-0.00293536, -0.000484969, 0.000830819, 0.999995)
-bones/11/rotation = Quaternion(0.617152, -0.0315234, 0.0291601, 0.785671)
+bones/10/rotation = Quaternion(-0.00293541, -0.000484984, 0.000830831, 0.999995)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(0.617151, -0.0315212, 0.0291312, 0.785673)
 bones/11/scale = Vector3(0.999998, 1.00003, 1)
 bones/12/position = Vector3(0.852143, 0.33637, -0.0677814)
 bones/12/rotation = Quaternion(-0.0834518, -0.145932, 0.755328, 0.633419)
@@ -102,9 +122,15 @@ tree_root = SubResource("AnimationNodeBlendTree_43awg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle_run_blend/blend_amount = 0.0
 parameters/idle_run_blend2/blend_amount = 0.0
+parameters/sheath_shot/active = false
+parameters/sheath_shot/internal_active = false
+parameters/sheath_shot/request = 0
 parameters/sheath_state/current_state = "sheathed"
 parameters/sheath_state/transition_request = ""
 parameters/sheath_state/current_index = 0
+parameters/unsheath_attack_shot/active = false
+parameters/unsheath_attack_shot/internal_active = false
+parameters/unsheath_attack_shot/request = 0
 parameters/unsheath_shot/active = false
 parameters/unsheath_shot/internal_active = false
 parameters/unsheath_shot/request = 0
