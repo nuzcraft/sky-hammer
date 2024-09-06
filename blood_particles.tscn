@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0cdqe3wjwacq"]
+
+[ext_resource type="Script" path="res://blood_particles.gd" id="1_f700e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3nob"]
+shading_mode = 0
+albedo_color = Color(0.388235, 0.145098, 0.054902, 1)
+disable_receive_shadows = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_17tsm"]
+material = SubResource("StandardMaterial3D_r3nob")
+radius = 0.05
+height = 0.1
+radial_segments = 10
+rings = 5
+
+[node name="BloodParticles" type="CPUParticles3D"]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+mesh = SubResource("SphereMesh_17tsm")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.5
+initial_velocity_max = 0.7
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+color = Color(0.388235, 0.145098, 0.054902, 1)
+script = ExtResource("1_f700e")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

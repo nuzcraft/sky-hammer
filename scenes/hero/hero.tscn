@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmeu6itpc0f30"]
+[gd_scene load_steps=7 format=3 uid="uid://dmeu6itpc0f30"]
 
 [ext_resource type="PackedScene" uid="uid://diwoax8yqrwn2" path="res://assets/models/hero_model.tscn" id="1_7xmbd"]
 [ext_resource type="Script" path="res://scenes/hero/hero.gd" id="1_c27ct"]
 [ext_resource type="Script" path="res://scenes/hero/camera_joint.gd" id="2_48fn1"]
+[ext_resource type="Script" path="res://scenes/hero/shake_camera.gd" id="3_lhf6b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vgxs5"]
 radius = 0.4
@@ -26,6 +27,7 @@ script = ExtResource("2_48fn1")
 
 [node name="Camera3D" type="Camera3D" parent="CameraJoint"]
 v_offset = 1.0
+script = ExtResource("3_lhf6b")
 
 [node name="HeroModel" parent="." instance=ExtResource("1_7xmbd")]
 
