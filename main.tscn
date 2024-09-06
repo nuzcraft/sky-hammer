@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://blhke6jw1ae1h"]
+[gd_scene load_steps=10 format=3 uid="uid://blhke6jw1ae1h"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_b0plm"]
 [ext_resource type="Environment" uid="uid://de42pcq6ihk6f" path="res://custom_environment.tres" id="1_se5um"]
 [ext_resource type="PackedScene" uid="uid://dmeu6itpc0f30" path="res://scenes/hero/hero.tscn" id="2_abg1x"]
 
@@ -18,10 +19,13 @@ albedo_color = Color(0.619608, 0.196078, 0.152941, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_4nb16"]
 material = SubResource("StandardMaterial3D_wbg6c")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_nqgai"]
+
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ahgx6"]
 data = PackedVector3Array(20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, 20, -20, 0, -20, 20, 0, -20)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_b0plm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_se5um")
@@ -36,6 +40,13 @@ mesh = SubResource("PlaneMesh_ecjik")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-0.219676, 0, 0.975573, 0, 1, 0, -0.975573, 0, -0.219676, 2.06317, 1.31466, 0)
 mesh = SubResource("BoxMesh_4nb16")
+
+[node name="TestHurtArea" type="Area3D" parent="MeshInstance3D/MeshInstance3D"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/TestHurtArea"]
+shape = SubResource("BoxShape3D_nqgai")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
 

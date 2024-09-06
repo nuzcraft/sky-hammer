@@ -1,6 +1,8 @@
 extends CharacterBody3D
 class_name Hero
 
+signal attack_landed(area, strength)
+
 @export var RUN_SPEED: float = 5.0
 @export var SPRINT_SPEED: float = 10.0
 var speed: float = RUN_SPEED
@@ -99,3 +101,10 @@ func stopped_state() -> void:
 		HERO_STATE.UNSHEATH_ATTACKING:
 			if not animation_tree.get("parameters/unsheath_attack_shot/active"):
 				STATE = HERO_STATE.UNSHEATHED
+			await get_tree().create_timer(0.5).timeout
+			$HeroModel/UnsheathAttackArea.monitoring = true
+			await get_tree().create_timer(0.3).timeout
+			$HeroModel/UnsheathAttackArea.monitoring = false
+
+func _on_unsheath_attack_area_area_entered(area: Area3D) -> void:
+	attack_landed.emit(area, 20)
