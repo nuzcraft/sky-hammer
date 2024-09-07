@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxh4vfgy8ui6k"]
+
+[ext_resource type="Script" path="res://scenes/blood.gd" id="1_fcjcw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yy7v1"]
+albedo_color = Color(0.619608, 0.196078, 0.152941, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_cso15"]
+material = SubResource("StandardMaterial3D_yy7v1")
+radius = 0.1
+height = 0.2
+radial_segments = 10
+rings = 10
+
+[node name="Blood" type="Node3D"]
+script = ExtResource("1_fcjcw")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 12
+lifetime = 0.3
+one_shot = true
+speed_scale = 0.6
+explosiveness = 0.5
+randomness = 0.5
+mesh = SubResource("SphereMesh_cso15")
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 3.0
+
+[connection signal="finished" from="CPUParticles3D" to="." method="_on_cpu_particles_3d_finished"]

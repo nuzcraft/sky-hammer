@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Hero
 
-signal attack_landed(area, strength)
+signal attack_landed(area, strength, pos)
 
 @export var RUN_SPEED: float = 5.0
 @export var SPRINT_SPEED: float = 10.0
@@ -107,4 +107,7 @@ func stopped_state() -> void:
 			$HeroModel/UnsheathAttackArea.monitoring = false
 
 func _on_unsheath_attack_area_area_entered(area: Area3D) -> void:
-	attack_landed.emit(area, 20)
+	#$HeroModel/UnsheathAttackArea.set_deferred("monitoring", false)
+	var pos = (area.global_position + $HeroModel/UnsheathAttackArea.global_position) / 2
+	pos.y += 0.5
+	attack_landed.emit(area, 20, pos)
