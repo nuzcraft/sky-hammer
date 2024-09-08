@@ -3,8 +3,9 @@
 
 # Godot-specific ignores
 .import/
+*.import
 export.cfg
-export_presets.cfg
+# export_presets.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -13,3 +14,10 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# big reference file
+reference/mhfu_anim_reference.mp4
+reference/mhfu_sheath_unsheath.mp4
+reference/mhfu_unsheath_run_reference.mkv
+reference/mhfu_unsheath_attack_reference.mkv
+reference/mhfu_sheath_unsheath_reference.mkv
