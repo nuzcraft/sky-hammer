@@ -10,17 +10,23 @@ const JUMP_VELOCITY: float = 4.5
 const ACCELLERATION: float = 0.3
 const FRICTION: float = 0.8
 
+var roll_speed: float = 10.0
+
 @onready var camera_joint: SpringArm3D = $CameraJoint
 @onready var model: Node3D = $HeroModel
 @onready var animation_tree: AnimationTree = model.get_node("AnimationTree")
 @onready var animation_player: AnimationPlayer = model.get_node("AnimationPlayer")
+
+var roll_direction: Vector3
 
 enum HERO_STATE{
 	SHEATHED,
 	SHEATHING,
 	UNSHEATHED,
 	UNSHEATHING,
-	UNSHEATH_ATTACKING
+	UNSHEATH_ATTACKING,
+	UNSHEATH_ROLLING,
+	SHEATH_ROLLING,
 }
 var STATE = HERO_STATE.SHEATHED
 
@@ -39,6 +45,10 @@ func _physics_process(delta: float) -> void:
 			stopped_state()
 		HERO_STATE.UNSHEATH_ATTACKING:
 			stopped_state()
+		HERO_STATE.SHEATH_ROLLING:
+			rolling_state()
+		HERO_STATE.UNSHEATH_ROLLING:
+			rolling_state()
 	
 func _process(delta: float) -> void:
 	camera_joint.position = position
@@ -48,6 +58,8 @@ func moveable_state() -> void:
 	move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	move_direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
 	move_direction = move_direction.rotated(Vector3.UP, camera_joint.rotation.y).normalized()
+	if move_direction != Vector3.ZERO:
+		roll_direction = move_direction
 	
 	if Input.is_action_just_pressed("sprint"): 
 		speed = SPRINT_SPEED
@@ -89,6 +101,22 @@ func moveable_state() -> void:
 				animation_tree.set("parameters/idle_run_blend/blend_amount", 0)
 				animation_tree.set("parameters/idle_run_blend2/blend_amount", 0)
 				STATE = HERO_STATE.SHEATHING
+	elif Input.is_action_just_pressed("roll"):
+		match STATE:
+			HERO_STATE.SHEATHED:
+				if roll_direction:
+					animation_tree.set("parameters/roll_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					animation_tree.set("parameters/idle_run_blend/blend_amount", 0)
+					animation_tree.set("parameters/idle_run_blend2/blend_amount", 0)
+					STATE = HERO_STATE.SHEATH_ROLLING
+					$RollTimer.start()
+			HERO_STATE.UNSHEATHED:
+				if roll_direction:
+					animation_tree.set("parameters/unsheath_roll_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					animation_tree.set("parameters/idle_run_blend/blend_amount", 0)
+					animation_tree.set("parameters/idle_run_blend2/blend_amount", 0)
+					STATE = HERO_STATE.UNSHEATH_ROLLING
+					$RollTimer.start()
 			
 func stopped_state() -> void:
 	match STATE:
@@ -105,9 +133,27 @@ func stopped_state() -> void:
 			$HeroModel/UnsheathAttackArea.monitoring = true
 			await get_tree().create_timer(0.3).timeout
 			$HeroModel/UnsheathAttackArea.monitoring = false
-
+			
+func rolling_state() -> void:
+	model.rotation.y = lerp_angle(model.rotation.y, Vector2(roll_direction.z, roll_direction.x).angle(), ACCELLERATION)
+	velocity.x = roll_direction.x * roll_speed
+	velocity.z = roll_direction.z * roll_speed
+	move_and_slide()
+	match STATE:
+		HERO_STATE.SHEATH_ROLLING:
+			if not animation_tree.get("parameters/roll_shot/active"):
+				STATE = HERO_STATE.SHEATHED
+				roll_speed = SPRINT_SPEED
+		HERO_STATE.UNSHEATH_ROLLING:
+			if not animation_tree.get("parameters/unsheath_roll_shot/active"):
+				STATE = HERO_STATE.UNSHEATHED
+				roll_speed = SPRINT_SPEED
+	
 func _on_unsheath_attack_area_area_entered(area: Area3D) -> void:
 	#$HeroModel/UnsheathAttackArea.set_deferred("monitoring", false)
 	var pos = (area.global_position + $HeroModel/UnsheathAttackArea.global_position) / 2
 	pos.y += 0.5
 	attack_landed.emit(area, 20, pos)
+
+func _on_roll_timer_timeout() -> void:
+	roll_speed = 2.0
