@@ -13,6 +13,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
+	# TODO add property to enemy so they only take one hit at a time
 	camera.magnitude = ((strength / 100) * 0.25) + .05
 	camera.period = 0.2
 	camera._camera_shake()
