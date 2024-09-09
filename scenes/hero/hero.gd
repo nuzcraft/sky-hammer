@@ -86,6 +86,7 @@ func moveable_state() -> void:
 			HERO_STATE.SHEATHED:
 				if velocity.length() < 0.2:
 					animation_tree.set("parameters/unsheath_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					#animation_tree.set("parameters/unsheath_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT)
 					STATE = HERO_STATE.UNSHEATHING
 				else:
 					animation_tree.set("parameters/unsheath_attack_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
