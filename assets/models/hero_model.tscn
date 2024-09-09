@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://diwoax8yqrwn2"]
+[gd_scene load_steps=20 format=3 uid="uid://diwoax8yqrwn2"]
 
 [ext_resource type="PackedScene" uid="uid://c5esjcj7i4orp" path="res://assets/models/hero.blend" id="1_ei1my"]
 
@@ -11,6 +11,11 @@ animation = &"idle"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bcp16"]
 animation = &"idle_unsheath"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3gnc0"]
+animation = &"roll"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yn2ba"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_icrci"]
 animation = &"run"
@@ -41,9 +46,15 @@ animation = &"unsheath_attack"
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_g13fy"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h7lua"]
+animation = &"unsheath_roll"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ocmdg"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_b4op3"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_43awg"]
+graph_offset = Vector2(288.263, 424.457)
 nodes/idle_animation/node = SubResource("AnimationNodeAnimation_sxjjh")
 nodes/idle_animation/position = Vector2(-520, 120)
 nodes/idle_run_blend/node = SubResource("AnimationNodeBlend2_cg10p")
@@ -52,7 +63,11 @@ nodes/idle_run_blend2/node = SubResource("AnimationNodeBlend2_1d0tg")
 nodes/idle_run_blend2/position = Vector2(-320, 420)
 nodes/idle_unsheath_animation/node = SubResource("AnimationNodeAnimation_bcp16")
 nodes/idle_unsheath_animation/position = Vector2(-560, 420)
-nodes/output/position = Vector2(800, 420)
+nodes/output/position = Vector2(1180, 560)
+nodes/roll_animation/node = SubResource("AnimationNodeAnimation_3gnc0")
+nodes/roll_animation/position = Vector2(580, 680)
+nodes/roll_shot/node = SubResource("AnimationNodeOneShot_yn2ba")
+nodes/roll_shot/position = Vector2(780, 480)
 nodes/run_animation/node = SubResource("AnimationNodeAnimation_icrci")
 nodes/run_animation/position = Vector2(-520, 260)
 nodes/run_unsheath_animation/node = SubResource("AnimationNodeAnimation_81h2d")
@@ -69,9 +84,13 @@ nodes/unsheath_attack_animation/node = SubResource("AnimationNodeAnimation_5r5hq
 nodes/unsheath_attack_animation/position = Vector2(300, 620)
 nodes/unsheath_attack_shot/node = SubResource("AnimationNodeOneShot_g13fy")
 nodes/unsheath_attack_shot/position = Vector2(540, 420)
+nodes/unsheath_roll_animation/node = SubResource("AnimationNodeAnimation_h7lua")
+nodes/unsheath_roll_animation/position = Vector2(740, 760)
+nodes/unsheath_roll_shot/node = SubResource("AnimationNodeOneShot_ocmdg")
+nodes/unsheath_roll_shot/position = Vector2(980, 580)
 nodes/unsheath_shot/node = SubResource("AnimationNodeOneShot_b4op3")
 nodes/unsheath_shot/position = Vector2(160, 240)
-node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 1, &"run_animation", &"idle_run_blend2", 0, &"idle_unsheath_animation", &"idle_run_blend2", 1, &"run_unsheath_animation", &"output", 0, &"unsheath_attack_shot", &"sheath_shot", 0, &"unsheath_shot", &"sheath_shot", 1, &"sheath_animation", &"sheath_state", 0, &"idle_run_blend", &"sheath_state", 1, &"idle_run_blend2", &"unsheath_attack_shot", 0, &"sheath_shot", &"unsheath_attack_shot", 1, &"unsheath_attack_animation", &"unsheath_shot", 0, &"sheath_state", &"unsheath_shot", 1, &"unsheath_animation"]
+node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 1, &"run_animation", &"idle_run_blend2", 0, &"idle_unsheath_animation", &"idle_run_blend2", 1, &"run_unsheath_animation", &"output", 0, &"unsheath_roll_shot", &"roll_shot", 0, &"unsheath_attack_shot", &"roll_shot", 1, &"roll_animation", &"sheath_shot", 0, &"unsheath_shot", &"sheath_shot", 1, &"sheath_animation", &"sheath_state", 0, &"idle_run_blend", &"sheath_state", 1, &"idle_run_blend2", &"unsheath_attack_shot", 0, &"sheath_shot", &"unsheath_attack_shot", 1, &"unsheath_attack_animation", &"unsheath_roll_shot", 0, &"roll_shot", &"unsheath_roll_shot", 1, &"unsheath_roll_animation", &"unsheath_shot", 0, &"sheath_state", &"unsheath_shot", 1, &"unsheath_animation"]
 
 [node name="HeroModel" instance=ExtResource("1_ei1my")]
 
@@ -79,26 +98,26 @@ node_connections = [&"idle_run_blend", 0, &"idle_animation", &"idle_run_blend", 
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(-1.87812e-22, 0.958203, 2.75017e-09)
-bones/0/rotation = Quaternion(-0.0201568, -0.294001, -0.00658624, 0.95557)
-bones/1/rotation = Quaternion(0.117074, 0.186069, -0.0140867, 0.975435)
-bones/2/rotation = Quaternion(-0.0107751, -0.0617341, 0.989294, -0.131793)
+bones/0/position = Vector3(-3.92149e-22, 0.957903, 1.98169e-09)
+bones/0/rotation = Quaternion(-0.0199448, -0.294068, -0.00668678, 0.955553)
+bones/1/rotation = Quaternion(0.116792, 0.186078, -0.0139626, 0.975469)
+bones/2/rotation = Quaternion(-0.010806, -0.0619471, 0.989301, -0.131644)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/rotation = Quaternion(0.141531, -0.00219147, -0.010074, 0.98988)
-bones/4/rotation = Quaternion(0.293715, 0.112828, 0.941792, -0.118448)
+bones/4/rotation = Quaternion(0.293741, 0.113189, 0.941712, -0.118674)
 bones/4/scale = Vector3(1.00006, 1, 1.00003)
-bones/5/rotation = Quaternion(-0.196692, 0.000474752, -0.0556767, 0.978883)
+bones/5/rotation = Quaternion(-0.197267, 0.000474698, -0.0558395, 0.978758)
 bones/5/scale = Vector3(1, 0.999997, 0.999995)
-bones/6/rotation = Quaternion(0.577102, 0.0123096, 0.00095992, 0.816579)
+bones/6/rotation = Quaternion(0.577414, 0.0123797, 0.00104205, 0.816357)
 bones/6/scale = Vector3(1.00002, 1.00001, 1.00001)
-bones/7/rotation = Quaternion(-0.0243841, -0.0858329, 0.990507, 0.104565)
+bones/7/rotation = Quaternion(-0.0243696, -0.0860155, 0.990478, 0.104698)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(0.220835, 0.0368728, 0.0582146, 0.972874)
-bones/9/rotation = Quaternion(0.125032, -0.0849812, 0.984415, 0.0898427)
+bones/9/rotation = Quaternion(0.125096, -0.0847584, 0.98444, 0.0896922)
 bones/9/scale = Vector3(1.00006, 0.999999, 1.00003)
-bones/10/rotation = Quaternion(-0.0029354, -0.000484983, 0.000830818, 0.999995)
+bones/10/rotation = Quaternion(-0.00293537, -0.000484971, 0.000830821, 0.999995)
 bones/10/scale = Vector3(1, 1, 1)
-bones/11/rotation = Quaternion(0.617531, -0.0316221, 0.0290207, 0.785375)
+bones/11/rotation = Quaternion(0.617152, -0.0315231, 0.0291562, 0.785672)
 bones/11/scale = Vector3(0.999998, 1.00003, 1)
 bones/12/position = Vector3(0.852143, 0.33637, -0.0677814)
 bones/12/rotation = Quaternion(-0.0834518, -0.145932, 0.755328, 0.633419)
@@ -121,6 +140,9 @@ tree_root = SubResource("AnimationNodeBlendTree_43awg")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle_run_blend/blend_amount = 0.0
 parameters/idle_run_blend2/blend_amount = 0.0
+parameters/roll_shot/active = false
+parameters/roll_shot/internal_active = false
+parameters/roll_shot/request = 0
 parameters/sheath_shot/active = false
 parameters/sheath_shot/internal_active = false
 parameters/sheath_shot/request = 0
@@ -130,6 +152,9 @@ parameters/sheath_state/current_index = 0
 parameters/unsheath_attack_shot/active = false
 parameters/unsheath_attack_shot/internal_active = false
 parameters/unsheath_attack_shot/request = 0
+parameters/unsheath_roll_shot/active = false
+parameters/unsheath_roll_shot/internal_active = false
+parameters/unsheath_roll_shot/request = 0
 parameters/unsheath_shot/active = false
 parameters/unsheath_shot/internal_active = false
 parameters/unsheath_shot/request = 0
