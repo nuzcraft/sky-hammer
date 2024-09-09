@@ -27,8 +27,12 @@ enum HERO_STATE{
 	UNSHEATH_ATTACKING,
 	UNSHEATH_ROLLING,
 	SHEATH_ROLLING,
+	POUNDING,
+	POUNDING_2,
 }
 var STATE = HERO_STATE.SHEATHED
+
+var input_buffer: String
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -49,11 +53,16 @@ func _physics_process(delta: float) -> void:
 			rolling_state()
 		HERO_STATE.UNSHEATH_ROLLING:
 			rolling_state()
+		HERO_STATE.POUNDING:
+			stopped_state()
+		HERO_STATE.POUNDING_2:
+			stopped_state()
 	
 func _process(delta: float) -> void:
 	camera_joint.position = position
 	
 func moveable_state() -> void:
+	input_buffer = ""
 	var move_direction := Vector3.ZERO
 	move_direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	move_direction.z = Input.get_action_strength("down") - Input.get_action_strength("up")
@@ -94,6 +103,8 @@ func moveable_state() -> void:
 				animation_tree.set("parameters/sheath_state/transition_request", "unsheathed")
 				animation_tree.set("parameters/idle_run_blend/blend_amount", 0)
 				animation_tree.set("parameters/idle_run_blend2/blend_amount", 0)
+			HERO_STATE.UNSHEATHED:
+				pound()
 	elif Input.is_action_just_pressed("sheath"):
 		match STATE:
 			HERO_STATE.UNSHEATHED:
@@ -120,6 +131,11 @@ func moveable_state() -> void:
 					$RollTimer.start()
 			
 func stopped_state() -> void:
+	if Input.is_action_just_pressed("attack"):
+		input_buffer = "attack"
+	elif Input.is_action_just_pressed("attack"):
+		input_buffer = "roll"
+
 	match STATE:
 		HERO_STATE.SHEATHING:
 			if not animation_tree.get("parameters/sheath_shot/active"):
@@ -129,13 +145,29 @@ func stopped_state() -> void:
 				STATE = HERO_STATE.UNSHEATHED
 		HERO_STATE.UNSHEATH_ATTACKING:
 			if not animation_tree.get("parameters/unsheath_attack_shot/active"):
-				STATE = HERO_STATE.UNSHEATHED
+				if input_buffer == "attack":
+					pound()
+				else: STATE = HERO_STATE.UNSHEATHED
 			await get_tree().create_timer(0.5).timeout
 			$HeroModel/UnsheathAttackArea.monitoring = true
 			await get_tree().create_timer(0.3).timeout
 			$HeroModel/UnsheathAttackArea.monitoring = false
+		HERO_STATE.POUNDING:
+			if not animation_tree.get("parameters/pound_shot/active"):
+				if input_buffer == "attack":
+					animation_tree.set("parameters/pound2_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					STATE = HERO_STATE.POUNDING_2
+				else: STATE = HERO_STATE.UNSHEATHED
+		HERO_STATE.POUNDING_2:
+			if not animation_tree.get("parameters/pound2_shot/active"):
+				#if input_buffer == "attack":
+					#animation_tree.set("parameters/pound2_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					#STATE = HERO_STATE.UNSHEATHED
+				#else: 
+					STATE = HERO_STATE.UNSHEATHED
 			
 func rolling_state() -> void:
+	input_buffer = ""
 	model.rotation.y = lerp_angle(model.rotation.y, Vector2(roll_direction.z, roll_direction.x).angle(), ACCELLERATION)
 	velocity.x = roll_direction.x * roll_speed
 	velocity.z = roll_direction.z * roll_speed
@@ -158,3 +190,7 @@ func _on_unsheath_attack_area_area_entered(area: Area3D) -> void:
 
 func _on_roll_timer_timeout() -> void:
 	roll_speed = 2.0
+	
+func pound() -> void:
+	animation_tree.set("parameters/pound_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	STATE = HERO_STATE.POUNDING
