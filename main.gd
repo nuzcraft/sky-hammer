@@ -8,13 +8,15 @@ const BLOOD = preload("res://scenes/blood.tscn")
 func _ready() -> void:
 	hero.attack_landed.connect(_on_hero_attack_landed)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
+	# TODO add property to enemy so they only take one hit at a time
 	camera.magnitude = ((strength / 100) * 0.25) + .05
+	camera.period = 0.2
+	if strength > 60: camera.period /= 2
 	camera._camera_shake()
 	var blood = BLOOD.instantiate()
 	blood.strength = strength
@@ -25,6 +27,8 @@ func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
 func hit_stop(strength: int) -> void:
 	var new_time_scale = (100 - (min(strength, 100) * 0.9)) / 100
 	Engine.time_scale = new_time_scale
+	var amount = 0.3
+	if strength > 60: amount /= 2
 	await get_tree().create_timer(0.1).timeout
-	get_tree().create_tween().tween_property(Engine, "time_scale", 1.0, 0.2)	
+	get_tree().create_tween().tween_property(Engine, "time_scale", 1.0, amount)	
 	
