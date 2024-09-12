@@ -29,6 +29,7 @@ enum HERO_STATE{
 	SHEATH_ROLLING,
 	POUNDING,
 	POUNDING_2,
+	GOLFSWINGING,
 }
 var STATE = HERO_STATE.SHEATHED
 
@@ -56,6 +57,8 @@ func _physics_process(delta: float) -> void:
 		HERO_STATE.POUNDING:
 			stopped_state()
 		HERO_STATE.POUNDING_2:
+			stopped_state()
+		HERO_STATE.GOLFSWINGING:
 			stopped_state()
 	
 func _process(delta: float) -> void:
@@ -137,7 +140,6 @@ func stopped_state() -> void:
 	move_direction = move_direction.rotated(Vector3.UP, camera_joint.rotation.y).normalized()
 	if move_direction != Vector3.ZERO:
 		roll_direction = move_direction
-
 	match STATE:
 		HERO_STATE.SHEATHING:
 			if not animation_tree.get("parameters/sheath_shot/active"):
@@ -170,10 +172,10 @@ func stopped_state() -> void:
 			$HeroModel/PoundAttackArea.monitoring = false
 		HERO_STATE.POUNDING_2:
 			if not animation_tree.get("parameters/pound2_shot/active"):
-				#if input_buffer == "attack":
-					#animation_tree.set("parameters/pound2_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-					#STATE = HERO_STATE.UNSHEATHED
-				if input_buffer == "roll":
+				if input_buffer == "attack":
+					animation_tree.set("parameters/golfswing_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+					STATE = HERO_STATE.GOLFSWINGING
+				elif input_buffer == "roll":
 					unsheath_roll()
 				else: 
 					STATE = HERO_STATE.UNSHEATHED
@@ -181,6 +183,16 @@ func stopped_state() -> void:
 			$HeroModel/Pound2AttackArea.monitoring = true
 			await get_tree().create_timer(0.2).timeout
 			$HeroModel/Pound2AttackArea.monitoring = false
+		HERO_STATE.GOLFSWINGING:
+			if not animation_tree.get("parameters/golfswing_shot/active"):
+				if input_buffer == "roll":
+					unsheath_roll()
+				else: 
+					STATE = HERO_STATE.UNSHEATHED
+			await get_tree().create_timer(0.5).timeout
+			$HeroModel/GolfswingAttackArea.monitoring = true
+			await get_tree().create_timer(0.2).timeout
+			$HeroModel/GolfswingAttackArea.monitoring = false
 			
 func rolling_state() -> void:
 	input_buffer = ""
@@ -230,3 +242,9 @@ func _on_pound_2_attack_area_area_entered(area: Area3D) -> void:
 	var pos = (area.global_position + $HeroModel/Pound2AttackArea.global_position) / 2
 	pos.y += 0.25
 	attack_landed.emit(area, 20, pos)
+
+func _on_golfswing_attack_area_area_entered(area: Area3D) -> void:
+	$HeroModel/GolfswingAttackArea.monitoring = false
+	var pos = (area.global_position + $HeroModel/GolfswingAttackArea.global_position) / 2
+	pos.y += 0.5
+	attack_landed.emit(area, 100, pos)

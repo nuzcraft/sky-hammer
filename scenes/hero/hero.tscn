@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmeu6itpc0f30"]
+[gd_scene load_steps=8 format=3 uid="uid://dmeu6itpc0f30"]
 
 [ext_resource type="PackedScene" uid="uid://diwoax8yqrwn2" path="res://assets/models/hero_model.tscn" id="1_7xmbd"]
 [ext_resource type="Script" path="res://scenes/hero/hero.gd" id="1_c27ct"]
@@ -10,6 +10,9 @@ radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7syeu"]
 size = Vector3(1.55615, 1.81067, 1.09277)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hdmia"]
+size = Vector3(1.55615, 1.81067, 1.45801)
 
 [node name="Hero" type="CharacterBody3D"]
 script = ExtResource("1_c27ct")
@@ -58,6 +61,15 @@ monitoring = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02808, 0.905334, 0.0639648)
 shape = SubResource("BoxShape3D_7syeu")
 
+[node name="GolfswingAttackArea" type="Area3D" parent="HeroModel"]
+collision_layer = 4
+collision_mask = 32
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeroModel/GolfswingAttackArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02808, 0.905334, -0.118653)
+shape = SubResource("BoxShape3D_hdmia")
+
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
@@ -65,4 +77,5 @@ one_shot = true
 [connection signal="area_entered" from="HeroModel/UnsheathAttackArea" to="." method="_on_unsheath_attack_area_area_entered"]
 [connection signal="area_entered" from="HeroModel/PoundAttackArea" to="." method="_on_pound_attack_area_area_entered"]
 [connection signal="area_entered" from="HeroModel/Pound2AttackArea" to="." method="_on_pound_2_attack_area_area_entered"]
+[connection signal="area_entered" from="HeroModel/GolfswingAttackArea" to="." method="_on_golfswing_attack_area_area_entered"]
 [connection signal="timeout" from="RollTimer" to="." method="_on_roll_timer_timeout"]
