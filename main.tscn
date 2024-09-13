@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://blhke6jw1ae1h"]
+[gd_scene load_steps=12 format=3 uid="uid://blhke6jw1ae1h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b0plm"]
 [ext_resource type="Environment" uid="uid://de42pcq6ihk6f" path="res://custom_environment.tres" id="1_se5um"]
 [ext_resource type="PackedScene" uid="uid://dmeu6itpc0f30" path="res://scenes/hero/hero.tscn" id="2_abg1x"]
+[ext_resource type="PackedScene" uid="uid://daf7ukk4ne25k" path="res://scenes/monster/monster.tscn" id="4_q2o0l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eagy4"]
 diffuse_mode = 1
@@ -57,9 +58,13 @@ shape = SubResource("BoxShape3D_nqgai")
 shape = SubResource("ConcavePolygonShape3D_3fbqv")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+collision_mask = 18
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
 shape = SubResource("ConcavePolygonShape3D_ahgx6")
 
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
-transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, -4, 5.96046e-08, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.96046e-08, 0)
+
+[node name="Monster" parent="." instance=ExtResource("4_q2o0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.26219, 6.01032e-08, -9.74325)

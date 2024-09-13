@@ -107,9 +107,11 @@ roll={
 
 [layer_names]
 
+3d_physics/layer_1="world"
+3d_physics/layer_2="hero"
 3d_physics/layer_3="hero_hitbox_layer"
 3d_physics/layer_4="hero_hurtbox_layer"
-3d_physics/layer_5="enemy_hitbox_layer"
+3d_physics/layer_5="monster"
 3d_physics/layer_6="enemy_hurtbox_layer"
 
 [rendering]

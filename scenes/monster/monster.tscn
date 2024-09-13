@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://daf7ukk4ne25k"]
+
+[ext_resource type="Script" path="res://scenes/monster/monster.gd" id="1_5c602"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vg0ka"]
+size = Vector3(2.5, 2, 1.5)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hhhcs"]
+radius = 1.0
+height = 2.75
+
+[node name="Monster" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 3
+script = ExtResource("1_5c602")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_vg0ka")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hhhcs")
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38854, 0)
+pixel_size = 0.02
+text = "STATE"
