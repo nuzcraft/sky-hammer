@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://ducpgubahjh0p"]
+
+[ext_resource type="PackedScene" uid="uid://b5epdbh7e6un3" path="res://assets/models/dinos/Parasaurolophus.glb" id="1_5rbg3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gv684"]
+animation = &"Parasaurolophus_Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_xj6w8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c0t4o"]
+animation = &"Parasaurolophus_Walk"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_anl3o"]
+graph_offset = Vector2(-338, 75)
+nodes/idle_anim/node = SubResource("AnimationNodeAnimation_gv684")
+nodes/idle_anim/position = Vector2(-200, 120)
+nodes/idle_walk_blend/node = SubResource("AnimationNodeBlend2_xj6w8")
+nodes/idle_walk_blend/position = Vector2(60, 120)
+nodes/walk_anim/node = SubResource("AnimationNodeAnimation_c0t4o")
+nodes/walk_anim/position = Vector2(-200, 280)
+node_connections = [&"idle_walk_blend", 0, &"idle_anim", &"idle_walk_blend", 1, &"walk_anim", &"output", 0, &"idle_walk_blend"]
+
+[node name="ParasaurolophusModel" instance=ExtResource("1_5rbg3")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/position = Vector3(0.0308162, 3.99042, 0.925595)
+bones/1/rotation = Quaternion(0.0110151, 0, 2.44584e-18, 0.999939)
+bones/2/position = Vector3(-0.189043, -1.23734, 0.728564)
+bones/2/rotation = Quaternion(-2.62114e-07, -1.24435e-07, 0.707107, 0.707107)
+bones/3/rotation = Quaternion(-0.666501, 0.694965, 0.179629, -0.20133)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(-0.223905, -0.0301155, -0.106828, 0.96827)
+bones/5/rotation = Quaternion(0.374843, 0.0405197, 0.079202, 0.92281)
+bones/6/position = Vector3(-0.209406, -1.41689, -1.0734)
+bones/6/rotation = Quaternion(0.138232, -0.138233, 0.693464, 0.693464)
+bones/7/rotation = Quaternion(0.721228, -0.678313, 0.0906143, -0.107284)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.485225, -0.000184486, 0.0331245, 0.873762)
+bones/9/position = Vector3(0.127411, -1.29654, 0.890403)
+bones/9/rotation = Quaternion(0.707107, 0.707107, -1.64576e-07, -2.21973e-07)
+bones/10/rotation = Quaternion(-0.166843, -0.234353, 0.669794, 0.684556)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/rotation = Quaternion(-0.222068, 0.0624673, 0.114278, 0.966294)
+bones/11/scale = Vector3(1, 1, 1)
+bones/12/rotation = Quaternion(0.49097, -0.050419, -0.073301, 0.866622)
+bones/13/position = Vector3(0.147774, -1.52658, -0.922573)
+bones/13/rotation = Quaternion(0.702586, 0.702586, 0.0798267, -0.079827)
+bones/14/rotation = Quaternion(0.0977115, 0.100618, 0.720226, 0.679413)
+bones/15/rotation = Quaternion(-0.642551, 0.0140114, -0.0261595, 0.765668)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/position = Vector3(0.474191, -1.77699, -0.956241)
+bones/16/rotation = Quaternion(-0.645241, 5.46441e-07, -4.61512e-07, 0.763979)
+bones/17/rotation = Quaternion(0.018827, -7.15129e-07, 1.34658e-08, 0.999823)
+bones/17/scale = Vector3(1, 1, 1)
+bones/18/rotation = Quaternion(-0.14582, 1.1834e-07, -1.16636e-08, 0.989311)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/rotation = Quaternion(-0.0699877, -1.19079e-07, -8.33529e-09, 0.997548)
+bones/20/rotation = Quaternion(0.0263224, -5.13868e-10, -1.12108e-10, 0.999654)
+bones/21/rotation = Quaternion(-0.234332, 1.23685e-07, -6.78235e-09, 0.972157)
+bones/22/rotation = Quaternion(2.1275e-07, 0.735314, 0.677727, 2.30827e-07)
+bones/23/rotation = Quaternion(0.152544, 0.000277781, -0.0383345, 0.987553)
+bones/24/scale = Vector3(1, 1, 1)
+bones/25/position = Vector3(0.0109114, 0.979236, -0.148278)
+bones/25/rotation = Quaternion(0.0430666, -0.0450098, -0.0234482, 0.997782)
+bones/26/rotation = Quaternion(-0.541598, -0.215269, 0.144584, 0.799641)
+bones/27/position = Vector3(-0.747934, 0.0861704, -1.15985)
+bones/27/rotation = Quaternion(0.707107, -8.0663e-07, -1.10965e-06, 0.707107)
+bones/28/rotation = Quaternion(0.707107, -1.29531e-06, -1.29531e-06, 0.707107)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_anl3o")
+anim_player = NodePath("../AnimationPlayer")
+parameters/idle_walk_blend/blend_amount = 0.0

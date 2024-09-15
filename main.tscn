@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://blhke6jw1ae1h"]
+[gd_scene load_steps=13 format=3 uid="uid://blhke6jw1ae1h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b0plm"]
 [ext_resource type="Environment" uid="uid://de42pcq6ihk6f" path="res://custom_environment.tres" id="1_se5um"]
 [ext_resource type="PackedScene" uid="uid://dmeu6itpc0f30" path="res://scenes/hero/hero.tscn" id="2_abg1x"]
-[ext_resource type="PackedScene" uid="uid://daf7ukk4ne25k" path="res://scenes/monster/monster.tscn" id="4_q2o0l"]
+[ext_resource type="PackedScene" uid="uid://ijgjcyx7hna8" path="res://scenes/monster/parasaurolophus.tscn" id="4_qc6iv"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_v3y8o"]
+vertices = PackedVector3Array(1, 0.5, -1, 2.25, 0.5, -1.25, 2.25, 0.5, -19.5, 0.75, 0.5, -0.25, -19.5, 0.5, -19.5, -19.5, 0.5, -0.25, 3.25, 0.5, -0.75, 3.25, 0.5, 0, 19.5, 0.5, 0, 19.5, 0.5, -19.5, 1.75, 0.5, 19.5, 1.75, 0.5, 1.25, 1, 0.5, 1, -19.5, 0.5, 19.5, 3, 0.5, 1, 19.5, 0.5, 19.5)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(0, 3, 2), PackedInt32Array(2, 3, 5), PackedInt32Array(2, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(6, 1, 8), PackedInt32Array(8, 1, 2), PackedInt32Array(8, 2, 9), PackedInt32Array(12, 11, 10), PackedInt32Array(12, 10, 3), PackedInt32Array(3, 10, 5), PackedInt32Array(5, 10, 13), PackedInt32Array(14, 7, 8), PackedInt32Array(14, 8, 11), PackedInt32Array(11, 8, 10), PackedInt32Array(10, 8, 15)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eagy4"]
 diffuse_mode = 1
@@ -38,33 +42,37 @@ environment = ExtResource("1_se5um")
 transform = Transform3D(-0.614492, -0.655575, 0.438886, -1.75549e-08, 0.55631, 0.830975, -0.788923, 0.510627, -0.341848, 0, 1.85305, 0)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("PlaneMesh_ecjik")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_v3y8o")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_ecjik")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MeshInstance3D"]
 transform = Transform3D(-0.219676, 0, 0.975573, 0, 1, 0, -0.975573, 0, -0.219676, 2.06317, 1.31466, 0)
 mesh = SubResource("BoxMesh_4nb16")
 
-[node name="TestHurtArea" type="Area3D" parent="MeshInstance3D/MeshInstance3D"]
+[node name="TestHurtArea" type="Area3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D"]
 collision_layer = 32
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/TestHurtArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D/TestHurtArea"]
 shape = SubResource("BoxShape3D_nqgai")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3fbqv")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
 collision_mask = 18
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D2"]
 shape = SubResource("ConcavePolygonShape3D_ahgx6")
 
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.96046e-08, 0)
 
-[node name="Monster" parent="." instance=ExtResource("4_q2o0l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.26219, 6.01032e-08, -9.74325)
+[node name="Parasaurolophus" parent="." instance=ExtResource("4_qc6iv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2295, 0.0094298, -11.3427)
