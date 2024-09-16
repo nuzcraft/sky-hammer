@@ -1,6 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dum70jtkxm02r"]
-
-[resource]
-resource_name = "Green"
-albedo_color = Color(0.219608, 0.411765, 0.337255, 1)
-roughness = 0.5
