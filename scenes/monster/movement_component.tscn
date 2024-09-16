@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwpdunymar1dr"]
+
+[ext_resource type="Script" path="res://scenes/monster/movement_component.gd" id="1_tsouo"]
+
+[node name="MovementComponent" type="Node"]
+script = ExtResource("1_tsouo")

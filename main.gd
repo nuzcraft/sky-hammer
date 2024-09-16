@@ -10,7 +10,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
+		enemy.set_target(hero.global_position)
 
 func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
 	# TODO add property to enemy so they only take one hit at a time

@@ -74,5 +74,5 @@ shape = SubResource("ConcavePolygonShape3D_ahgx6")
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.96046e-08, 0)
 
-[node name="Parasaurolophus" parent="." instance=ExtResource("4_qc6iv")]
+[node name="Parasaurolophus" parent="." groups=["Enemies"] instance=ExtResource("4_qc6iv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2295, 0.0094298, -11.3427)
