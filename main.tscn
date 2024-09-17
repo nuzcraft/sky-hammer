@@ -1,39 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://blhke6jw1ae1h"]
+[gd_scene load_steps=6 format=3 uid="uid://blhke6jw1ae1h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b0plm"]
 [ext_resource type="Environment" uid="uid://de42pcq6ihk6f" path="res://custom_environment.tres" id="1_se5um"]
 [ext_resource type="PackedScene" uid="uid://dmeu6itpc0f30" path="res://scenes/hero/hero.tscn" id="2_abg1x"]
-[ext_resource type="PackedScene" uid="uid://bpyoryomkq6v8" path="res://scenes/environment/common_tree.tscn" id="3_qeqsl"]
 [ext_resource type="PackedScene" uid="uid://ijgjcyx7hna8" path="res://scenes/monster/parasaurolophus.tscn" id="4_qc6iv"]
-[ext_resource type="PackedScene" uid="uid://cr3ubfoa45eo2" path="res://assets/models/environment/Flower_3_Group.gltf" id="6_p5q0l"]
-[ext_resource type="PackedScene" uid="uid://d3ci4n2w88a4w" path="res://assets/models/environment/Grass_Common_Short.gltf" id="7_vq1kn"]
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_v3y8o"]
-vertices = PackedVector3Array(-19.5, 0.257228, -10, -16, 0.257228, -10, -15.5, 0.257228, -11.25, -19.5, 0.257228, -19.5, 9, 0.257228, -11.75, 10, 0.257228, -12.25, 10, 0.257228, -19.5, -14, 0.257228, -9.25, -14.75, 0.257228, -8.75, 1.25, 0.257228, -1, -14.5, 0.257228, -11.25, -14, 0.257228, -10.75, 2.5, 0.257228, -1.25, 9, 0.257228, -10.5, 11, 0.257228, -11.75, 19.5, 0.257228, -11, 19.5, 0.257228, -19.5, 11, 0.257228, -11, 10.25, 7.25723, -11.5, 10.5, 7.25723, -10.75, 11.25, 7.25723, -11, 10.5, 0.257228, -9.75, 9.5, 0.257228, -9.75, 3.25, 0.257228, -0.75, 3, 0.257228, 1, 19.5, 0.257228, 1.25, -14.75, 7.25723, -10.5, -14.5, 7.25723, -9.75, -13.75, 7.25723, -10, -16, 0.257228, -9.25, -19.5, 0.257228, -1.25, 0.75, 0.257228, -0.5, 10, 0.257228, 19.5, 10, 0.257228, 15.25, 9, 0.257228, 14.75, 9, 0.257228, 13.5, 2.75, 0.257228, 1, 1.25, 0.257228, 1.25, -19.5, 0.257228, 19.5, 10.5, 0.257228, 12.75, 11, 0.257228, 13.5, 19.5, 0.257228, 13.5, 9.5, 0.257228, 12.75, 10.25, 7.25723, 13.5, 10.5, 7.25723, 14.25, 11.25, 7.25723, 14, 11, 0.257228, 14.75, 19.5, 0.257228, 19.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(6, 5, 4), PackedInt32Array(9, 8, 7), PackedInt32Array(10, 2, 3), PackedInt32Array(10, 3, 11), PackedInt32Array(11, 3, 9), PackedInt32Array(9, 3, 4), PackedInt32Array(4, 3, 6), PackedInt32Array(12, 9, 13), PackedInt32Array(13, 9, 4), PackedInt32Array(9, 7, 11), PackedInt32Array(5, 6, 14), PackedInt32Array(14, 6, 16), PackedInt32Array(14, 16, 15), PackedInt32Array(15, 17, 14), PackedInt32Array(20, 19, 18), PackedInt32Array(21, 17, 15), PackedInt32Array(23, 12, 22), PackedInt32Array(22, 12, 13), PackedInt32Array(23, 21, 24), PackedInt32Array(24, 21, 15), PackedInt32Array(24, 15, 25), PackedInt32Array(23, 22, 21), PackedInt32Array(28, 27, 26), PackedInt32Array(0, 1, 29), PackedInt32Array(29, 8, 0), PackedInt32Array(0, 8, 30), PackedInt32Array(30, 8, 31), PackedInt32Array(31, 8, 9), PackedInt32Array(34, 33, 32), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 34), PackedInt32Array(30, 31, 37), PackedInt32Array(34, 32, 37), PackedInt32Array(37, 32, 30), PackedInt32Array(30, 32, 38), PackedInt32Array(40, 39, 41), PackedInt32Array(41, 39, 25), PackedInt32Array(25, 39, 24), PackedInt32Array(24, 42, 36), PackedInt32Array(36, 42, 35), PackedInt32Array(39, 42, 24), PackedInt32Array(45, 44, 43), PackedInt32Array(33, 46, 32), PackedInt32Array(32, 46, 47), PackedInt32Array(47, 46, 41), PackedInt32Array(46, 40, 41)]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eagy4"]
-diffuse_mode = 1
-albedo_color = Color(0.537255, 0.666667, 0.333333, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ecjik"]
-material = SubResource("StandardMaterial3D_eagy4")
-size = Vector2(40, 40)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbg6c"]
-diffuse_mode = 1
-albedo_color = Color(0.619608, 0.196078, 0.152941, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4nb16"]
-material = SubResource("StandardMaterial3D_wbg6c")
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_nqgai"]
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3fbqv"]
-data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ahgx6"]
-data = PackedVector3Array(20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, 20, -20, 0, -20, 20, 0, -20)
+[ext_resource type="PackedScene" uid="uid://t1bx3yiyne8l" path="res://scenes/levels/level_1.tscn" id="8_64pu4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_b0plm")
@@ -45,58 +16,10 @@ environment = ExtResource("1_se5um")
 transform = Transform3D(-0.614492, -0.655575, 0.438886, -1.75549e-08, 0.55631, 0.830975, -0.788923, 0.510627, -0.341848, 0, 1.85305, 0)
 shadow_enabled = true
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
-navigation_mesh = SubResource("NavigationMesh_v3y8o")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
-mesh = SubResource("PlaneMesh_ecjik")
-skeleton = NodePath("../..")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/MeshInstance3D"]
-transform = Transform3D(-0.219676, 0, 0.975573, 0, 1, 0, -0.975573, 0, -0.219676, 2.06317, 1.31466, 0)
-mesh = SubResource("BoxMesh_4nb16")
-
-[node name="TestHurtArea" type="Area3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D"]
-collision_layer = 32
-collision_mask = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D/TestHurtArea"]
-shape = SubResource("BoxShape3D_nqgai")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_3fbqv")
-
-[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
-collision_mask = 18
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D2"]
-shape = SubResource("ConcavePolygonShape3D_ahgx6")
-
-[node name="CommonTree" parent="NavigationRegion3D" instance=ExtResource("3_qeqsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -10)
-
-[node name="CommonTree2" parent="NavigationRegion3D" instance=ExtResource("3_qeqsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 14)
-
-[node name="CommonTree3" parent="NavigationRegion3D" instance=ExtResource("3_qeqsl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -11)
+[node name="Level1" parent="." instance=ExtResource("8_64pu4")]
 
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.96046e-08, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1111, 5.96046e-08, 19.2025)
 
 [node name="Parasaurolophus" parent="." instance=ExtResource("4_qc6iv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2295, 0.0094298, -11.3427)
-
-[node name="Flower_3_Group2" parent="." instance=ExtResource("6_p5q0l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5181, -9.53674e-07, 12.6615)
-
-[node name="Flower_3_Group3" parent="." instance=ExtResource("6_p5q0l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3717, 0, -3.0422)
-
-[node name="Grass_Common_Short2" parent="." instance=ExtResource("7_vq1kn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.24361, 0.0271091, -11.3481)
-
-[node name="Grass_Common_Short3" parent="." instance=ExtResource("7_vq1kn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9371, 0, -10.6541)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2295, 1, -11.3427)
