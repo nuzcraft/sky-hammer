@@ -4,10 +4,21 @@ extends Node3D
 @onready var camera: Camera3D = hero.get_node("CameraJoint").get_node("Camera3D")
 
 const BLOOD = preload("res://scenes/blood.tscn")
+const LEVEL_1 = preload("res://scenes/levels/level_1.tscn")
+const PARASAUROLOPHUS = preload("res://scenes/monster/parasaurolophus.tscn")
+const END = preload("res://scenes/control/end.tscn")
+
+enum LEVEL {
+	ONE,
+	TWO,
+	THREE
+}
+
+var current_level = LEVEL.ONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hero.attack_landed.connect(_on_hero_attack_landed)
-	SimpleGrass.set_interactive(true)
+	start_level()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,3 +45,24 @@ func hit_stop(strength: int) -> void:
 	await get_tree().create_timer(0.1).timeout
 	get_tree().create_tween().tween_property(Engine, "time_scale", 1.0, amount)	
 	
+func start_level() -> void:
+	match current_level:
+		LEVEL.ONE:
+			var level = LEVEL_1.instantiate()
+			add_child(level)
+			level.portal_entered.connect(_on_level_portal_entered)
+			hero.position = Vector3(17.5, 1.12, 22)
+			var para1 = PARASAUROLOPHUS.instantiate()
+			add_child(para1)
+			para1.position = Vector3(-8.5, 1, -16.5)
+			var para2 = PARASAUROLOPHUS.instantiate()
+			add_child(para2)
+			para2.position = Vector3(5, 1, -14)
+			var para3 = PARASAUROLOPHUS.instantiate()
+			add_child(para3)
+			para3.position = Vector3(-1.5, 1, -8)
+	
+func _on_level_portal_entered(body: Node3D, level: Node3D) -> void:
+	if level is Level1:
+		if body is Hero:
+			get_tree().change_scene_to_packed(END)

@@ -4,6 +4,8 @@ class_name AIComponent
 @onready var navigation_agent_3d: NavigationAgent3D = $"../NavigationAgent3D"
 @onready var idle_timer: Timer = $IdleTimer
 
+var rng = RandomNumberGenerator.new()
+
 enum AI_STATE {
 	IDLE,
 	PURSUING,
@@ -19,6 +21,9 @@ var current_ai_state = AI_STATE.IDLE
 var current_action_state = ACTION_STATE.IDLE
 var target: Vector3
 
+func _ready() -> void:
+	rng.randomize()
+
 func pursuing_state():
 	current_ai_state = AI_STATE.PURSUING
 	
@@ -27,8 +32,8 @@ func idle_state():
 
 func set_idle_target() -> void:
 	var random_position := Vector3.ZERO
-	random_position.x = randf_range(-20.0, 20.0)
-	random_position.z = randf_range(-20.0, 20.0)
+	random_position.x = rng.randf_range(-12.5, 12.5)
+	random_position.z = rng.randf_range(-25.0, 25.0)
 	navigation_agent_3d.target_position = random_position
 	current_action_state = ACTION_STATE.WALKING
 	
@@ -51,8 +56,8 @@ func _on_idle_timer_timeout() -> void:
 func target_reached() -> void:
 	match current_ai_state:
 		AI_STATE.IDLE:
-			idle_timer.start(8.0)
+			idle_timer.start(rng.randf_range(6.5, 8.5))
 			current_action_state = ACTION_STATE.IDLE
 		AI_STATE.PURSUING:
-			idle_timer.start(4.0)
+			idle_timer.start(rng.randf_range(3.5, 4.5))
 			current_action_state = ACTION_STATE.IDLE

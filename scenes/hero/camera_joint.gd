@@ -7,6 +7,8 @@ extends SpringArm3D
 func _ready() -> void:
 	set_as_top_level(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	rotation_degrees.y = 90
+	rotation_degrees.x = -20
 	
 func _physics_process(delta: float) -> void:
 	var vec := Vector2.ZERO

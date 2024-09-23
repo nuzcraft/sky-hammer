@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://blhke6jw1ae1h"]
+[gd_scene load_steps=4 format=3 uid="uid://blhke6jw1ae1h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_b0plm"]
 [ext_resource type="Environment" uid="uid://de42pcq6ihk6f" path="res://custom_environment.tres" id="1_se5um"]
 [ext_resource type="PackedScene" uid="uid://dmeu6itpc0f30" path="res://scenes/hero/hero.tscn" id="2_abg1x"]
-[ext_resource type="PackedScene" uid="uid://ijgjcyx7hna8" path="res://scenes/monster/parasaurolophus.tscn" id="4_qc6iv"]
-[ext_resource type="PackedScene" uid="uid://t1bx3yiyne8l" path="res://scenes/levels/level_1.tscn" id="8_64pu4"]
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_b0plm")
@@ -16,10 +14,5 @@ environment = ExtResource("1_se5um")
 transform = Transform3D(-0.614492, -0.655575, 0.438886, -1.75549e-08, 0.55631, 0.830975, -0.788923, 0.510627, -0.341848, 0, 1.85305, 0)
 shadow_enabled = true
 
-[node name="Level1" parent="." instance=ExtResource("8_64pu4")]
-
 [node name="Hero" parent="." instance=ExtResource("2_abg1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1111, 5.96046e-08, 19.2025)
-
-[node name="Parasaurolophus" parent="." instance=ExtResource("4_qc6iv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2295, 1, -11.3427)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 1.12, 22)
