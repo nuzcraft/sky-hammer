@@ -1,6 +1,8 @@
 extends Node
 class_name AIComponent
 
+signal attack
+
 @onready var navigation_agent_3d: NavigationAgent3D = $"../NavigationAgent3D"
 @onready var idle_timer: Timer = $IdleTimer
 
@@ -9,12 +11,12 @@ var rng = RandomNumberGenerator.new()
 enum AI_STATE {
 	IDLE,
 	PURSUING,
-	#ATTACKING,
 }
 
 enum ACTION_STATE {
 	IDLE,
 	WALKING,
+	ATTACKING,
 }
 
 var current_ai_state = AI_STATE.IDLE
@@ -59,5 +61,6 @@ func target_reached() -> void:
 			idle_timer.start(rng.randf_range(6.5, 8.5))
 			current_action_state = ACTION_STATE.IDLE
 		AI_STATE.PURSUING:
+			attack.emit()
 			idle_timer.start(rng.randf_range(3.5, 4.5))
 			current_action_state = ACTION_STATE.IDLE

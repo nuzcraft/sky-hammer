@@ -1,6 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://ducpgubahjh0p"]
+[gd_scene load_steps=10 format=3 uid="uid://ducpgubahjh0p"]
 
 [ext_resource type="PackedScene" uid="uid://b5epdbh7e6un3" path="res://assets/models/dinos/parasaurolophus/Parasaurolophus.glb" id="1_0av8y"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5dvd"]
+animation = &"Parasaurolophus_Attack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_aimuk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sl6ym"]
+animation = &"Parasaurolophus_Death"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_wrgtf"]
+input_0/name = "alive"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "dead"
+input_1/auto_advance = false
+input_1/break_loop_at_end = true
+input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gv684"]
 animation = &"Parasaurolophus_Idle"
@@ -11,47 +29,56 @@ animation = &"Parasaurolophus_Idle"
 animation = &"Parasaurolophus_Walk"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_anl3o"]
-graph_offset = Vector2(-338, 75)
+graph_offset = Vector2(-436.592, -14.3906)
+nodes/attack_anim/node = SubResource("AnimationNodeAnimation_a5dvd")
+nodes/attack_anim/position = Vector2(-120, 340)
+nodes/attack_shot/node = SubResource("AnimationNodeOneShot_aimuk")
+nodes/attack_shot/position = Vector2(161.935, 171.15)
+nodes/death_anim/node = SubResource("AnimationNodeAnimation_sl6ym")
+nodes/death_anim/position = Vector2(100, 480)
+nodes/death_state/node = SubResource("AnimationNodeTransition_wrgtf")
+nodes/death_state/position = Vector2(380, 220)
 nodes/idle_anim/node = SubResource("AnimationNodeAnimation_gv684")
-nodes/idle_anim/position = Vector2(-200, 120)
+nodes/idle_anim/position = Vector2(-400, 80)
 nodes/idle_walk_blend/node = SubResource("AnimationNodeBlend2_xj6w8")
-nodes/idle_walk_blend/position = Vector2(60, 120)
+nodes/idle_walk_blend/position = Vector2(-100, 100)
+nodes/output/position = Vector2(500, 160)
 nodes/walk_anim/node = SubResource("AnimationNodeAnimation_c0t4o")
-nodes/walk_anim/position = Vector2(-200, 280)
-node_connections = [&"idle_walk_blend", 0, &"idle_anim", &"idle_walk_blend", 1, &"walk_anim", &"output", 0, &"idle_walk_blend"]
+nodes/walk_anim/position = Vector2(-400, 260)
+node_connections = [&"attack_shot", 0, &"idle_walk_blend", &"attack_shot", 1, &"attack_anim", &"death_state", 0, &"attack_shot", &"death_state", 1, &"death_anim", &"idle_walk_blend", 0, &"idle_anim", &"idle_walk_blend", 1, &"walk_anim", &"output", 0, &"death_state"]
 
 [node name="ParasaurolophusModel" instance=ExtResource("1_0av8y")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/1/position = Vector3(0.0308162, 4.0518, 0.953216)
+bones/1/position = Vector3(0.0308162, 4.2491, 1.042)
 bones/1/rotation = Quaternion(0.0110151, 0, 2.44584e-18, 0.999939)
 bones/2/position = Vector3(-0.189043, -1.23734, 0.728564)
 bones/2/rotation = Quaternion(-2.62114e-07, -1.24435e-07, 0.707107, 0.707107)
-bones/3/rotation = Quaternion(-0.666484, 0.694945, 0.179694, -0.201399)
-bones/4/rotation = Quaternion(-0.250458, -0.0317825, -0.106546, 0.961722)
+bones/3/rotation = Quaternion(-0.647709, 0.673949, 0.238109, -0.26376)
+bones/4/rotation = Quaternion(-0.307349, -0.0353125, -0.105661, 0.945053)
 bones/5/rotation = Quaternion(0.374843, 0.0405197, 0.079202, 0.92281)
 bones/6/position = Vector3(-0.209406, -1.41689, -1.0734)
-bones/6/rotation = Quaternion(0.1281, -0.1281, 0.695407, 0.695407)
+bones/6/rotation = Quaternion(0.0735829, -0.0735831, 0.703268, 0.703268)
 bones/7/rotation = Quaternion(0.721228, -0.678313, 0.0906143, -0.107284)
-bones/8/rotation = Quaternion(-0.436869, 0.00162159, 0.0330853, 0.898915)
+bones/8/rotation = Quaternion(-0.200415, 0.00977207, 0.0316508, 0.979151)
 bones/9/position = Vector3(0.127411, -1.29654, 0.890403)
 bones/9/rotation = Quaternion(0.707107, 0.707107, -1.64576e-07, -2.21973e-07)
-bones/10/rotation = Quaternion(-0.166904, -0.234416, 0.669779, 0.684535)
-bones/11/rotation = Quaternion(-0.252711, 0.0641319, 0.114961, 0.958545)
+bones/10/rotation = Quaternion(-0.220763, -0.290613, 0.653805, 0.662833)
+bones/11/rotation = Quaternion(-0.31862, 0.0675371, 0.116048, 0.938325)
 bones/12/rotation = Quaternion(0.49097, -0.050419, -0.073301, 0.866622)
 bones/13/position = Vector3(0.147774, -1.52658, -0.922573)
-bones/13/rotation = Quaternion(0.70295, 0.70295, 0.0765559, -0.0765561)
+bones/13/rotation = Quaternion(0.70469, 0.70469, 0.0584105, -0.0584107)
 bones/14/rotation = Quaternion(0.0977115, 0.100618, 0.720226, 0.679413)
-bones/15/rotation = Quaternion(-0.612274, 0.012983, -0.0266849, 0.790089)
+bones/15/rotation = Quaternion(-0.495283, 0.0091079, -0.0282433, 0.868225)
 bones/16/position = Vector3(0.474191, -1.77699, -0.956241)
-bones/17/rotation = Quaternion(0.0188938, -7.15128e-07, 1.35136e-08, 0.999821)
-bones/18/rotation = Quaternion(-0.145958, 1.17992e-07, -1.65614e-08, 0.989291)
-bones/19/rotation = Quaternion(-0.0604648, -1.19171e-07, -7.20031e-09, 0.99817)
-bones/20/rotation = Quaternion(0.0614534, -5.16243e-10, -1.12348e-10, 0.99811)
-bones/21/rotation = Quaternion(-0.135674, 1.22188e-07, -1.86269e-08, 0.990754)
+bones/17/rotation = Quaternion(0.0598607, -7.13973e-07, 4.28154e-08, 0.998207)
+bones/18/rotation = Quaternion(-0.073544, 1.18937e-07, -8.05872e-09, 0.997292)
+bones/19/rotation = Quaternion(0.0856154, -1.18773e-07, 1.0216e-08, 0.996328)
+bones/20/rotation = Quaternion(0.190204, 1.01969e-12, -2.84618e-11, 0.981745)
+bones/21/rotation = Quaternion(0.0817985, 1.18932e-07, 1.05427e-08, 0.996649)
 bones/22/rotation = Quaternion(2.1275e-07, 0.735314, 0.677727, 2.30827e-07)
 bones/23/rotation = Quaternion(0.152544, 0.000277781, -0.0383345, 0.987553)
-bones/25/position = Vector3(0.0075162, 0.928605, -0.10214)
+bones/25/position = Vector3(0.000113923, 0.818217, -0.00154829)
 bones/25/rotation = Quaternion(0.0430666, -0.0450098, -0.0234482, 0.997782)
 bones/26/rotation = Quaternion(-0.541598, -0.215269, 0.144584, 0.799641)
 bones/27/position = Vector3(-0.747934, 0.0861704, -1.15985)
@@ -61,4 +88,10 @@ bones/28/rotation = Quaternion(0.707107, -1.29531e-06, -1.29531e-06, 0.707107)
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_anl3o")
 anim_player = NodePath("../AnimationPlayer")
+parameters/attack_shot/active = false
+parameters/attack_shot/internal_active = false
+parameters/attack_shot/request = 0
+parameters/death_state/current_state = "alive"
+parameters/death_state/transition_request = ""
+parameters/death_state/current_index = 0
 parameters/idle_walk_blend/blend_amount = 0.0

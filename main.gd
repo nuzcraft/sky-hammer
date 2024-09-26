@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 		enemy.set_target(hero.global_position)
 
 func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
-	# TODO add property to enemy so they only take one hit at a time
 	camera.magnitude = ((strength / 100) * 0.25) + .05
 	camera.period = 0.2
 	if strength > 60: camera.period /= 2
@@ -34,6 +33,8 @@ func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
 	var blood = BLOOD.instantiate()
 	blood.strength = strength
 	blood.position = pos
+	var enemy = area.get_parent()
+	enemy.take_damage(60 * (strength * .01))
 	add_child(blood)
 	hit_stop(strength)
 

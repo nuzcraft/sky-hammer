@@ -9,7 +9,7 @@
 radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7syeu"]
-size = Vector3(1.55615, 1.81067, 1.09277)
+size = Vector3(1, 1.811, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdmia"]
 size = Vector3(1.55615, 1.81067, 1.45801)
@@ -42,7 +42,7 @@ collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeroModel/UnsheathAttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.75)
 shape = SubResource("BoxShape3D_7syeu")
 
 [node name="PoundAttackArea" type="Area3D" parent="HeroModel"]
@@ -51,7 +51,7 @@ collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeroModel/PoundAttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02808, 0.905334, 0.0639648)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 1)
 shape = SubResource("BoxShape3D_7syeu")
 
 [node name="Pound2AttackArea" type="Area3D" parent="HeroModel"]
@@ -60,7 +60,7 @@ collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeroModel/Pound2AttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02808, 0.905334, 0.0639648)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 1)
 shape = SubResource("BoxShape3D_7syeu")
 
 [node name="GolfswingAttackArea" type="Area3D" parent="HeroModel"]
@@ -69,7 +69,7 @@ collision_mask = 32
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeroModel/GolfswingAttackArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02808, 0.905334, -0.118653)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905, 1)
 shape = SubResource("BoxShape3D_hdmia")
 
 [node name="RollTimer" type="Timer" parent="."]

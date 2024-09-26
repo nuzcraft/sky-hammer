@@ -1,11 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ijgjcyx7hna8"]
+[gd_scene load_steps=9 format=3 uid="uid://ijgjcyx7hna8"]
 
 [ext_resource type="Script" path="res://scenes/monster/parasaurolophus.gd" id="1_b70mk"]
 [ext_resource type="PackedScene" uid="uid://ducpgubahjh0p" path="res://assets/models/dinos/scenes/parasaurolophus-model.tscn" id="1_rrcnm"]
 [ext_resource type="PackedScene" uid="uid://cwpdunymar1dr" path="res://scenes/monster/movement_component.tscn" id="3_imuep"]
 [ext_resource type="PackedScene" uid="uid://dd3bjxt3pbygd" path="res://scenes/monster/ai_component.tscn" id="4_i8k53"]
+[ext_resource type="PackedScene" uid="uid://covyigbb6aikk" path="res://scenes/monster/combat_component.tscn" id="5_h0pi1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_om638"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wumd2"]
+radius = 0.876071
+height = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0g6n"]
+size = Vector3(1, 2, 2)
 
 [node name="Parasaurolophus" type="CharacterBody3D" groups=["Enemies"]]
 collision_layer = 16
@@ -25,5 +33,25 @@ shape = SubResource("CapsuleShape3D_om638")
 [node name="MovementComponent" parent="." instance=ExtResource("3_imuep")]
 
 [node name="AIComponent" parent="." instance=ExtResource("4_i8k53")]
+
+[node name="CombatComponent" parent="." instance=ExtResource("5_h0pi1")]
+max_health = 160
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965925, 0, 0.965925, 0.258819, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_wumd2")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 8
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+shape = SubResource("BoxShape3D_a0g6n")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
