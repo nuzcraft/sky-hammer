@@ -4,5 +4,6 @@
 
 [resource]
 Button/fonts/font = ExtResource("1_qapnt")
+Label/colors/font_color = Color(0.145098, 0.184314, 0.25098, 1)
 Label/fonts/font = ExtResource("1_qapnt")
 ProgressBar/fonts/font = ExtResource("1_qapnt")
