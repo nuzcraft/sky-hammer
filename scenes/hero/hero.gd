@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Hero
 
 signal attack_landed(area, strength, pos)
+signal died
 
 @export var RUN_SPEED: float = 5.0
 @export var SPRINT_SPEED: float = 10.0
@@ -34,6 +35,9 @@ enum HERO_STATE{
 var STATE = HERO_STATE.SHEATHED
 
 var input_buffer: String
+
+func _ready() -> void:
+	if has_node("CombatComponent"): get_node("CombatComponent").died.connect(_on_died)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -248,3 +252,11 @@ func _on_golfswing_attack_area_area_entered(area: Area3D) -> void:
 	var pos = (area.global_position + $HeroModel/GolfswingAttackArea.global_position) / 2
 	pos.y += 0.5
 	attack_landed.emit(area, 100, pos)
+	
+func take_damage(amount: int) -> void :
+	if has_node("CombatComponent"):
+		get_node("CombatComponent").take_damage(amount)
+		print(get_node("CombatComponent").health)
+
+func _on_died() -> void:
+	died.emit()

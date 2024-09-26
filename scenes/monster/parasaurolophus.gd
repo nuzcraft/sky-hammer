@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal attack_landed
+
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var model: Node3D = $ParasaurolophusModel
 @onready var animation_tree: AnimationTree = $ParasaurolophusModel/AnimationTree
@@ -87,3 +89,13 @@ func _on_attack() -> void:
 	$Hitbox.monitoring = true
 	await get_tree().create_timer(0.3).timeout
 	$Hitbox.monitoring = false
+
+
+func _on_hitbox_area_entered(area: Area3D) -> void:
+	if area.get_parent() != self:
+		$Hitbox.monitoring = false
+		var pos = (area.global_position + $Hitbox.global_position) / 2
+		pos.y += 0.5
+		pos.z += 1.0
+		if combat_component and is_instance_valid(combat_component):
+			attack_landed.emit(area, combat_component.get_attack_amount(15), pos)

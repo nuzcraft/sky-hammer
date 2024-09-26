@@ -18,6 +18,7 @@ var current_level = LEVEL.ONE
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hero.attack_landed.connect(_on_hero_attack_landed)
+	hero.died.connect(_on_hero_died)
 	start_level()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,6 +38,17 @@ func _on_hero_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
 	enemy.take_damage(60 * (strength * .01))
 	add_child(blood)
 	hit_stop(strength)
+	
+func _on_enemy_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
+	var blood = BLOOD.instantiate()
+	blood.strength = strength / 80
+	blood.position = pos
+	add_child(blood)
+	var other = area.get_parent()
+	if other is Hero: 
+		other.take_damage(strength / 80)
+	else:
+		other.take_damage(strength / 80)
 
 func hit_stop(strength: int) -> void:
 	var new_time_scale = (100 - (min(strength, 100) * 0.9)) / 100
@@ -54,12 +66,15 @@ func start_level() -> void:
 			level.portal_entered.connect(_on_level_portal_entered)
 			hero.position = Vector3(17.5, 1.12, 22)
 			var para1 = PARASAUROLOPHUS.instantiate()
+			para1.attack_landed.connect(_on_enemy_attack_landed)
 			add_child(para1)
 			para1.position = Vector3(-8.5, 1, -16.5)
 			var para2 = PARASAUROLOPHUS.instantiate()
+			para2.attack_landed.connect(_on_enemy_attack_landed)
 			add_child(para2)
 			para2.position = Vector3(5, 1, -14)
 			var para3 = PARASAUROLOPHUS.instantiate()
+			para3.attack_landed.connect(_on_enemy_attack_landed)
 			add_child(para3)
 			para3.position = Vector3(-1.5, 1, -8)
 	
@@ -67,3 +82,7 @@ func _on_level_portal_entered(body: Node3D, level: Node3D) -> void:
 	if level is Level1:
 		if body is Hero:
 			get_tree().change_scene_to_packed(END)
+			
+func _on_hero_died() -> void:
+	print("hero died")
+	get_tree().change_scene_to_packed(END)

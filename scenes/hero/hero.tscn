@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmeu6itpc0f30"]
+[gd_scene load_steps=10 format=3 uid="uid://dmeu6itpc0f30"]
 
 [ext_resource type="PackedScene" uid="uid://diwoax8yqrwn2" path="res://assets/models/hero_model.tscn" id="1_7xmbd"]
 [ext_resource type="Script" path="res://scenes/hero/hero.gd" id="1_c27ct"]
 [ext_resource type="Script" path="res://scenes/hero/camera_joint.gd" id="2_48fn1"]
 [ext_resource type="Script" path="res://scenes/hero/shake_camera.gd" id="3_lhf6b"]
+[ext_resource type="PackedScene" uid="uid://covyigbb6aikk" path="res://scenes/monster/combat_component.tscn" id="5_c5pei"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vgxs5"]
 radius = 0.4
@@ -13,6 +14,9 @@ size = Vector3(1, 1.811, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hdmia"]
 size = Vector3(1.55615, 1.81067, 1.45801)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rbl6l"]
+size = Vector3(1, 2, 1)
 
 [node name="Hero" type="CharacterBody3D"]
 collision_layer = 2
@@ -75,6 +79,17 @@ shape = SubResource("BoxShape3D_hdmia")
 [node name="RollTimer" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_rbl6l")
+
+[node name="CombatComponent" parent="." instance=ExtResource("5_c5pei")]
+max_health = 100
 
 [connection signal="area_entered" from="HeroModel/UnsheathAttackArea" to="." method="_on_unsheath_attack_area_area_entered"]
 [connection signal="area_entered" from="HeroModel/PoundAttackArea" to="." method="_on_pound_attack_area_area_entered"]
