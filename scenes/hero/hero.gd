@@ -260,3 +260,8 @@ func take_damage(amount: int) -> void :
 
 func _on_died() -> void:
 	died.emit()
+	
+func get_health() -> int:
+	if has_node("CombatComponent"):
+		return get_node("CombatComponent").health
+	return 0

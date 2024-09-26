@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var hero = $Hero
 @onready var camera: Camera3D = hero.get_node("CameraJoint").get_node("Camera3D")
+@onready var health_bar: ProgressBar = $CanvasLayer/HBoxContainer/HealthBar
 
 const BLOOD = preload("res://scenes/blood.tscn")
 const LEVEL_1 = preload("res://scenes/levels/level_1.tscn")
@@ -19,6 +20,7 @@ var current_level = LEVEL.ONE
 func _ready() -> void:
 	hero.attack_landed.connect(_on_hero_attack_landed)
 	hero.died.connect(_on_hero_died)
+	health_bar.value = hero.get_health()
 	start_level()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +51,7 @@ func _on_enemy_attack_landed(area: Area3D, strength: int, pos: Vector3) -> void:
 		other.take_damage(strength / 80)
 	else:
 		other.take_damage(strength / 80)
+	health_bar.value = hero.get_health()
 
 func hit_stop(strength: int) -> void:
 	var new_time_scale = (100 - (min(strength, 100) * 0.9)) / 100

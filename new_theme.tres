@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://jurjywbd6y8f"]
+
+[ext_resource type="FontFile" uid="uid://dqri3d1isdr1d" path="res://assets/BerkshireSwash-Regular.ttf" id="1_qapnt"]
+
+[resource]
+Button/fonts/font = ExtResource("1_qapnt")
+Label/fonts/font = ExtResource("1_qapnt")
+ProgressBar/fonts/font = ExtResource("1_qapnt")
