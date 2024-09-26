@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://covyigbb6aikk"]
+
+[ext_resource type="Script" path="res://scenes/monster/combat_component.gd" id="1_iw36f"]
+
+[node name="CombatComponent" type="Node"]
+script = ExtResource("1_iw36f")

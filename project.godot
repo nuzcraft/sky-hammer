@@ -10,16 +10,24 @@ config_version=5
 
 [application]
 
-config/name="sky-hammer-2"
-run/main_scene="res://main.tscn"
+config/name="sky-hammer"
+run/main_scene="res://scenes/control/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/image="res://assets/pride-dark-c-side.png"
 config/icon="res://icon.svg"
+
+[autoload]
+
+SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
 
 [display]
 
 window/size/viewport_width=864
 window/stretch/mode="viewport"
-window/stretch/scale=3.0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/simplegrasstextured/plugin.cfg")
 
 [input]
 
@@ -106,13 +114,55 @@ roll={
 
 [layer_names]
 
+3d_physics/layer_1="world"
+3d_physics/layer_2="hero"
 3d_physics/layer_3="hero_hitbox_layer"
 3d_physics/layer_4="hero_hurtbox_layer"
-3d_physics/layer_5="enemy_hitbox_layer"
+3d_physics/layer_5="monster"
 3d_physics/layer_6="enemy_hurtbox_layer"
+3d_physics/layer_7="enemy_hitbox"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_environment="res://custom_environment.tres"
+
+[shader_globals]
+
+sgt_player_position={
+"type": "vec3",
+"value": Vector3(1e+06, 1e+06, 1e+06)
+}
+sgt_player_mov={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}
+sgt_normal_displacement={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/normal.png"
+}
+sgt_motion_texture={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/motion.png"
+}
+sgt_wind_direction={
+"type": "vec3",
+"value": Vector3(1, 0, 0)
+}
+sgt_wind_movement={
+"type": "vec3",
+"value": Vector2(0, 0)
+}
+sgt_wind_strength={
+"type": "float",
+"value": 0.15
+}
+sgt_wind_turbulence={
+"type": "float",
+"value": 1.0
+}
+sgt_wind_pattern={
+"type": "sampler2D",
+"value": "res://addons/simplegrasstextured/images/wind_pattern.png"
+}

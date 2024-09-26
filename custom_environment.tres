@@ -1,15 +1,21 @@
-[gd_resource type="Environment" load_steps=4 format=3 uid="uid://de42pcq6ihk6f"]
+[gd_resource type="Environment" load_steps=10 format=3 uid="uid://de42pcq6ihk6f"]
 
-[ext_resource type="Shader" path="res://shaders/sky-sokpop.gdshader" id="1_co1bn"]
+[ext_resource type="Shader" path="res://6texskybox.gdshader" id="1_qphmt"]
+[ext_resource type="Texture2D" uid="uid://dafhjw6uh23k5" path="res://assets/skybox/posz.jpg" id="2_hwqyu"]
+[ext_resource type="Texture2D" uid="uid://cx67vcc38qnvj" path="res://assets/skybox/negy.jpg" id="3_qvauo"]
+[ext_resource type="Texture2D" uid="uid://dddgx1k7obfgy" path="res://assets/skybox/negz.jpg" id="4_8khta"]
+[ext_resource type="Texture2D" uid="uid://dggj238frh41h" path="res://assets/skybox/negx.jpg" id="5_qcyd4"]
+[ext_resource type="Texture2D" uid="uid://scgyp2ishipm" path="res://assets/skybox/posx.jpg" id="6_lu83f"]
+[ext_resource type="Texture2D" uid="uid://bl02lbbq134ba" path="res://assets/skybox/posy.jpg" id="7_vli71"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bap6m"]
-shader = ExtResource("1_co1bn")
-shader_parameter/color_top = Color(0.960784, 0.933333, 0.894118, 1)
-shader_parameter/color_horizon = Color(0.278431, 0.560784, 0.792157, 1)
-shader_parameter/color_bottom = Color(0.145098, 0.184314, 0.25098, 1)
-shader_parameter/exponent_factor_top = 1.5
-shader_parameter/exponent_factor_bottom = 1.5
-shader_parameter/intensity_amp = 1.0
+shader = ExtResource("1_qphmt")
+shader_parameter/front = ExtResource("4_8khta")
+shader_parameter/back = ExtResource("2_hwqyu")
+shader_parameter/left = ExtResource("5_qcyd4")
+shader_parameter/right = ExtResource("6_lu83f")
+shader_parameter/top = ExtResource("7_vli71")
+shader_parameter/bottom = ExtResource("3_qvauo")
 
 [sub_resource type="Sky" id="Sky_1ye21"]
 sky_material = SubResource("ShaderMaterial_bap6m")

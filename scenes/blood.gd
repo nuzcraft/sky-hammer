@@ -8,7 +8,7 @@ func _ready() -> void:
 	cpu_particles_3d.amount = 12
 	cpu_particles_3d.initial_velocity_min = 2
 	cpu_particles_3d.initial_velocity_max = 3
-	cpu_particles_3d.amount *= (float(strength) / 100) + 1.0
+	cpu_particles_3d.amount *= (float(strength) / float(100)) + 1.0
 	#cpu_particles_3d.speed_scale += (float(strength*3) / 100) + 0.5
 	cpu_particles_3d.initial_velocity_max += (float(strength * 3) / 100)
 	cpu_particles_3d.emitting = true
