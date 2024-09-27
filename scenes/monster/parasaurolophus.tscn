@@ -13,7 +13,7 @@ radius = 0.876071
 height = 5.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a0g6n"]
-size = Vector3(1.5, 2, 4)
+size = Vector3(1, 2, 2)
 
 [node name="Parasaurolophus" type="CharacterBody3D" groups=["Enemies"]]
 collision_layer = 16
@@ -50,7 +50,7 @@ collision_mask = 40
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.75)
 shape = SubResource("BoxShape3D_a0g6n")
 
 [connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]

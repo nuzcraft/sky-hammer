@@ -84,4 +84,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "back to title"
 
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

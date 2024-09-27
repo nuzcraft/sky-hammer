@@ -98,4 +98,5 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 		pos.y += 0.5
 		pos.z += 1.0
 		if combat_component and is_instance_valid(combat_component):
+			SoundPlayer.play_sound(SoundPlayer.IMPACT_PLANK)
 			attack_landed.emit(area, combat_component.get_attack_amount(15), pos)

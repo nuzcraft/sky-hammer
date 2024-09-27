@@ -22,6 +22,7 @@ func _ready() -> void:
 	hero.died.connect(_on_hero_died)
 	health_bar.value = hero.get_health()
 	start_level()
+	SoundPlayer.transition_music(SoundPlayer.BATTLE_LOOP)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

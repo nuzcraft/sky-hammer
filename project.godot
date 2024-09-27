@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 SimpleGrass="*res://addons/simplegrasstextured/singleton.tscn"
+SoundPlayer="*res://scenes/sound_player.tscn"
 
 [display]
 
