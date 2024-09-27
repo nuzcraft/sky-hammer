@@ -11,6 +11,9 @@ const ROLLOVER_2 = preload("res://assets/sounds/rollover2.ogg")
 const IMPACT_PLANK = preload("res://assets/sounds/impactPlank_medium_000.ogg")
 const IMPACT_PUNCH = preload("res://assets/sounds/impactPunch_medium_000.ogg")
 
+const MONSTER_5 = preload("res://assets/sounds/Monster-5.wav")
+const MONSTER_11 = preload("res://assets/sounds/monster-11.wav")
+
 @onready var audio_players: Node = $AudioPlayers
 @onready var music_players: Node = $MusicPlayers
 
