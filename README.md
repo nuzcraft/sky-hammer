@@ -3,9 +3,8 @@
 TODO:
 
 - ✅player ui
-- ❎proper title screen
-- ❎proper death screen
-- ❎proper end screen
+- ✅proper title screen
+- ✅proper end screen
 - ❎music
 - ❎sound effects
 - ❎second level w/ big dino

@@ -256,7 +256,6 @@ func _on_golfswing_attack_area_area_entered(area: Area3D) -> void:
 func take_damage(amount: int) -> void :
 	if has_node("CombatComponent"):
 		get_node("CombatComponent").take_damage(amount)
-		print(get_node("CombatComponent").health)
 
 func _on_died() -> void:
 	died.emit()

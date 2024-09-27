@@ -1,7 +1,4 @@
 extends Control
-
-const MAIN = preload("res://main.tscn")
-const CREDITS = preload("res://scenes/control/credits.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -13,8 +10,5 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_packed(MAIN)
-
-
-func _on_button_2_pressed() -> void:
-	get_tree().change_scene_to_packed(CREDITS)
+	var TITLE = load("res://scenes/control/title.tscn")
+	get_tree().change_scene_to_packed(TITLE)
