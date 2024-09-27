@@ -78,6 +78,21 @@ text = "grass by icterus
 "
 horizontal_alignment = 1
 
+[node name="Label7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "music by omfgdude and
+of far different nature 
+"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "sounds by kenney and ogrebane
+"
+horizontal_alignment = 1
+
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4

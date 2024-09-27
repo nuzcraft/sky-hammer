@@ -7,7 +7,7 @@ TODO:
 - ✅proper end screen
 - ✅music
 - ✅sound effects
-- ❎pause menu
+- ✅pause menu
 - ❎second level w/ big dino
 - ❎finish itch page
 
@@ -21,4 +21,4 @@ grass by icterus https://github.com/IcterusGames/SimpleGrassTextured
 music by omfgdude https://opengameart.org/content/jungle-battle-loop
 music by of far different nature https://opengameart.org/content/tribal
 sound effects by kenney https://kenney.nl
-sound effects by orgebane https://opengameart.org/content/monster-sound-pack-volume-1
+sound effects by ogrebane https://opengameart.org/content/monster-sound-pack-volume-1

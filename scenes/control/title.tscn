@@ -91,9 +91,23 @@ layout_mode = 2
 size_flags_horizontal = 4
 value = 100.0
 
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_disabled_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_hover_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_pressed_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_focus_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0.145098, 0.184314, 0.25098, 1)
+button_pressed = true
+text = "crunchy"
+
 [connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="mouse_entered" from="VBoxContainer/Button2" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="drag_ended" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
 [connection signal="value_changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]

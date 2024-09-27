@@ -90,3 +90,9 @@ func _on_level_portal_entered(body: Node3D, level: Node3D) -> void:
 func _on_hero_died() -> void:
 	print("hero died")
 	get_tree().change_scene_to_packed(END)
+	
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			var main = load("res://scenes/control/title.tscn")
+			get_tree().change_scene_to_packed(main)
