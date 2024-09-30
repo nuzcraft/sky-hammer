@@ -233,30 +233,38 @@ func _on_unsheath_attack_area_area_entered(area: Area3D) -> void:
 	$HeroModel/UnsheathAttackArea.monitoring = false
 	var pos = (area.global_position + $HeroModel/UnsheathAttackArea.global_position) / 2
 	pos.y += 0.5
+	SoundPlayer.play_sound(SoundPlayer.IMPACT_PLANK)
 	attack_landed.emit(area, 20, pos)
 
 func _on_pound_attack_area_area_entered(area: Area3D) -> void:
 	$HeroModel/PoundAttackArea.monitoring = false
 	var pos = (area.global_position + $HeroModel/PoundAttackArea.global_position) / 2
 	pos.y += 0.25
+	SoundPlayer.play_sound(SoundPlayer.IMPACT_PLANK)
 	attack_landed.emit(area, 52, pos)
 
 func _on_pound_2_attack_area_area_entered(area: Area3D) -> void:
 	$HeroModel/Pound2AttackArea.monitoring = false
 	var pos = (area.global_position + $HeroModel/Pound2AttackArea.global_position) / 2
 	pos.y += 0.25
+	SoundPlayer.play_sound(SoundPlayer.IMPACT_PLANK)
 	attack_landed.emit(area, 20, pos)
 
 func _on_golfswing_attack_area_area_entered(area: Area3D) -> void:
 	$HeroModel/GolfswingAttackArea.monitoring = false
 	var pos = (area.global_position + $HeroModel/GolfswingAttackArea.global_position) / 2
 	pos.y += 0.5
+	SoundPlayer.play_sound(SoundPlayer.IMPACT_PUNCH)
 	attack_landed.emit(area, 100, pos)
 	
 func take_damage(amount: int) -> void :
 	if has_node("CombatComponent"):
 		get_node("CombatComponent").take_damage(amount)
-		print(get_node("CombatComponent").health)
 
 func _on_died() -> void:
 	died.emit()
+	
+func get_health() -> int:
+	if has_node("CombatComponent"):
+		return get_node("CombatComponent").health
+	return 0

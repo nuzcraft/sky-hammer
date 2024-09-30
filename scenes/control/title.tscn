@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx70qoqnkejy3"]
+[gd_scene load_steps=5 format=3 uid="uid://cx70qoqnkejy3"]
 
+[ext_resource type="Theme" uid="uid://jurjywbd6y8f" path="res://new_theme.tres" id="1_8jkpc"]
 [ext_resource type="Script" path="res://scenes/control/title.gd" id="1_tcigo"]
+[ext_resource type="Shader" path="res://scenes/control/gradient.gdshader" id="3_170at"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pufbl"]
+shader = ExtResource("3_170at")
+shader_parameter/first_color = Color(0.956863, 0.862745, 0.427451, 1)
+shader_parameter/second_color = Color(0.537255, 0.666667, 0.333333, 1)
+shader_parameter/position = 2.375e-08
+shader_parameter/size = 1.0
+shader_parameter/angle = 315.0
+shader_parameter/speed = 4.0
+shader_parameter/frequency = 12.0
+shader_parameter/amplitude = 0.1
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -9,9 +22,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_8jkpc")
 script = ExtResource("1_tcigo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pufbl")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,54 +35,79 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.960784, 0.933333, 0.894118, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -216.0
-offset_top = -241.0
-offset_right = 216.0
-offset_bottom = -151.0
+offset_left = -198.5
+offset_top = -103.0
+offset_right = 198.5
+offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 65
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Hammer Man"
+horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Start Game"
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start Demo"
 
-[node name="Label2" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -43.0
-offset_right = 20.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "a game by nuzcraft"
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "a demo by nuzcraft"
+horizontal_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="Filler" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "credits"
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+value = 100.0
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_disabled_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_hover_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_pressed_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_focus_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_color = Color(0.145098, 0.184314, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0.145098, 0.184314, 0.25098, 1)
+button_pressed = true
+text = "crunchy"
+
+[connection signal="mouse_entered" from="VBoxContainer/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Button2" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="drag_ended" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]

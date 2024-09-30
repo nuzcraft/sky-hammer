@@ -81,11 +81,15 @@ func _on_died() -> void:
 	movement_component.queue_free()
 	ai_component.queue_free()
 	dead = true
+	SoundPlayer.play_sound(SoundPlayer.MONSTER_11)
 	await get_tree().create_timer(60).timeout
 	queue_free()
 	
 func _on_attack() -> void:
+	
 	animation_tree.set("parameters/attack_shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+	await get_tree().create_timer(0.15).timeout
+	SoundPlayer.play_sound(SoundPlayer.MONSTER_5)
 	$Hitbox.monitoring = true
 	await get_tree().create_timer(0.3).timeout
 	$Hitbox.monitoring = false
@@ -98,4 +102,5 @@ func _on_hitbox_area_entered(area: Area3D) -> void:
 		pos.y += 0.5
 		pos.z += 1.0
 		if combat_component and is_instance_valid(combat_component):
+			SoundPlayer.play_sound(SoundPlayer.IMPACT_PLANK)
 			attack_landed.emit(area, combat_component.get_attack_amount(15), pos)
